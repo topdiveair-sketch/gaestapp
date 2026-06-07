@@ -1,4 +1,6 @@
 const phone = '+436646437526';
+const waPhone = '436646437526';
+
 function smsHref(text){
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
   const sep = isIOS ? '&' : '?';
@@ -6,30 +8,34 @@ function smsHref(text){
 }
 
 function whatsappHref(text){
-  return `https://wa.me/${phone.replace('+','')}?text=${encodeURIComponent(text)}`;
+  // api.whatsapp.com works more reliably than wa.me on Android, iPhone and desktop/WhatsApp Web.
+  return `https://api.whatsapp.com/send?phone=${waPhone}&text=${encodeURIComponent(text)}`;
 }
 
-function sendWhatsAppWithLocation(kind){
-  const fallbackMap = 'bitte Standort am Handy teilen oder Ort hier einfügen';
-  function buildText(mapLink){
-    if (kind === 'lost') {
-      return `Hallo Hans,
+function openWhatsApp(text){
+  window.location.href = whatsappHref(text);
+}
+
+function buildWhatsappText(kind, mapLink){
+  const locationText = mapLink || 'Bitte Standort in WhatsApp manuell teilen oder Ort/Wegweiser hier einfügen.';
+  if (kind === 'lost') {
+    return `Hallo Hans,
 
 wir haben uns verlaufen und benötigen Hilfe.
 
 Unser aktueller Standort:
-${mapLink}
+${locationText}
 
 Anzahl Personen:
 _____
 
 Vielen Dank.`;
-    }
-    if (kind === 'luggage') {
-      return `Hallo Hans,
+  }
+  if (kind === 'luggage') {
+    return `Hallo Hans,
 
 bitte Gepäck an folgenden Standort liefern:
-${mapLink}
+${locationText}
 
 Name:
 _____
@@ -37,26 +43,37 @@ Anzahl Gepäckstücke:
 _____
 
 Vielen Dank.`;
-    }
-    return `Hallo Hans,
+  }
+  return `Hallo Hans,
 
 hier ist mein aktueller Standort:
-${mapLink}
+${locationText}
 
 Viele Grüße`;
-  }
-  const openWa = (mapLink) => { window.location.href = whatsappHref(buildText(mapLink)); };
+}
+
+function sendWhatsAppWithLocation(kind){
+  // GPS funktioniert im Browser nur zuverlässig über HTTPS oder localhost. Beim direkten Öffnen der index.html
+  // vom Handy/PC kann der Browser den Standort blockieren. Dann wird WhatsApp trotzdem mit Hinweis geöffnet.
+  const fallback = buildWhatsappText(kind, null);
+
   if (!navigator.geolocation) {
-    openWa(fallbackMap);
+    openWhatsApp(fallback);
     return;
   }
-  navigator.geolocation.getCurrentPosition((pos) => {
-    const lat = pos.coords.latitude.toFixed(6);
-    const lon = pos.coords.longitude.toFixed(6);
-    openWa(`https://maps.google.com/?q=${lat},${lon}`);
-  }, () => {
-    openWa(fallbackMap);
-  }, {enableHighAccuracy:true, timeout:10000, maximumAge:60000});
+
+  navigator.geolocation.getCurrentPosition(
+    (pos) => {
+      const lat = pos.coords.latitude.toFixed(6);
+      const lon = pos.coords.longitude.toFixed(6);
+      const mapLink = `https://www.google.com/maps/search/?api=1&query=${lat},${lon}`;
+      openWhatsApp(buildWhatsappText(kind, mapLink));
+    },
+    () => {
+      openWhatsApp(fallback);
+    },
+    { enableHighAccuracy: true, timeout: 12000, maximumAge: 30000 }
+  );
 }
 
 function bindWhatsAppLocationButtons(){

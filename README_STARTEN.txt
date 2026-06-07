@@ -1,18 +1,14 @@
-Zuhause am Bach Erlebnis-App V5.6
-===================================
+Zuhause am Bach Erlebnis-App V5.7
 
 Start:
 1. ZIP entpacken.
-2. index.html im Browser öffnen.
-3. Für Handy-Nutzung den Ordner auf die Webseite hochladen und per QR-Code verlinken.
+2. index.html öffnen.
 
-Neu in V5.6:
-- Standort an Hans per WhatsApp senden.
-- Button „Ich habe mich verlaufen“ mit Google-Maps-Standort.
-- Button „Gepäcktransport hierher“ mit Google-Maps-Standort.
-- Telefonnummer einheitlich: +43 664 6437526.
+Wichtig zu WhatsApp-Standort:
+- Die WhatsApp-Buttons öffnen WhatsApp an Hans: +43 664 6437526.
+- GPS-Standort funktioniert im Browser nur zuverlässig, wenn die App über eine sichere Webseite (https://...) geöffnet wird.
+- Beim direkten Öffnen der index.html vom Handy/PC kann der Browser den Standort blockieren.
+- Dann öffnet WhatsApp trotzdem mit einer Vorlage: Gast soll Standort in WhatsApp manuell teilen oder den Ort/Wegweiser eintragen.
 
-Wichtig:
-Die Standort-Funktion funktioniert zuverlässig nur auf HTTPS-Webseiten oder lokal je nach Browserfreigabe.
-Der Gast muss die Standortfreigabe am Handy erlauben.
-Bei akuter Gefahr bitte immer zuerst Notruf wählen: 112 / 144 / 133.
+Empfohlene Veröffentlichung:
+https://www.zuhauseambach.at/gaesteapp/
