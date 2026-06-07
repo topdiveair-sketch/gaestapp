@@ -5,6 +5,72 @@ function smsHref(text){
   return `sms:${phone}${sep}body=${encodeURIComponent(text)}`;
 }
 
+function whatsappHref(text){
+  return `https://wa.me/${phone.replace('+','')}?text=${encodeURIComponent(text)}`;
+}
+
+function sendWhatsAppWithLocation(kind){
+  const fallbackMap = 'bitte Standort am Handy teilen oder Ort hier einfügen';
+  function buildText(mapLink){
+    if (kind === 'lost') {
+      return `Hallo Hans,
+
+wir haben uns verlaufen und benötigen Hilfe.
+
+Unser aktueller Standort:
+${mapLink}
+
+Anzahl Personen:
+_____
+
+Vielen Dank.`;
+    }
+    if (kind === 'luggage') {
+      return `Hallo Hans,
+
+bitte Gepäck an folgenden Standort liefern:
+${mapLink}
+
+Name:
+_____
+Anzahl Gepäckstücke:
+_____
+
+Vielen Dank.`;
+    }
+    return `Hallo Hans,
+
+hier ist mein aktueller Standort:
+${mapLink}
+
+Viele Grüße`;
+  }
+  const openWa = (mapLink) => { window.location.href = whatsappHref(buildText(mapLink)); };
+  if (!navigator.geolocation) {
+    openWa(fallbackMap);
+    return;
+  }
+  navigator.geolocation.getCurrentPosition((pos) => {
+    const lat = pos.coords.latitude.toFixed(6);
+    const lon = pos.coords.longitude.toFixed(6);
+    openWa(`https://maps.google.com/?q=${lat},${lon}`);
+  }, () => {
+    openWa(fallbackMap);
+  }, {enableHighAccuracy:true, timeout:10000, maximumAge:60000});
+}
+
+function bindWhatsAppLocationButtons(){
+  const pairs = [
+    ['waLocation','location'], ['waLocationCard','location'], ['waLocationContact','location'],
+    ['waLost','lost'], ['waLostCard','lost'],
+    ['waLuggageHere','luggage'], ['waLuggageHereCard','luggage']
+  ];
+  pairs.forEach(([id, kind]) => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('click', () => sendWhatsAppWithLocation(kind));
+  });
+}
+
 const form = document.getElementById('smsForm');
 if (form) {
   form.addEventListener('submit', (e) => {
@@ -49,25 +115,7 @@ if (luggageForm) {
   });
 }
 
-const locBtn = document.getElementById('locationSms');
-if (locBtn) {
-  locBtn.addEventListener('click', () => {
-    const fallback = `Hallo Hans,\n\nich brauche Hilfe. Mein Standort ist: bitte Standort/Ort hier einfügen.\n\nLiebe Grüße`;
-    if (!navigator.geolocation) {
-      window.location.href = smsHref(fallback);
-      return;
-    }
-    navigator.geolocation.getCurrentPosition((pos) => {
-      const lat = pos.coords.latitude.toFixed(6);
-      const lon = pos.coords.longitude.toFixed(6);
-      const maps = `https://maps.google.com/?q=${lat},${lon}`;
-      const text = `Hallo Hans,\n\nich brauche Hilfe. Mein aktueller Standort:\n${maps}\n\nLiebe Grüße`;
-      window.location.href = smsHref(text);
-    }, () => {
-      window.location.href = smsHref(fallback);
-    }, {enableHighAccuracy:true, timeout:7000, maximumAge:60000});
-  });
-}
+bindWhatsAppLocationButtons();
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => navigator.serviceWorker.register('./service-worker.js').catch(()=>{}));

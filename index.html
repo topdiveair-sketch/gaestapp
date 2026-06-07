@@ -14,6 +14,9 @@
   </header>
 
   <div class="top-actions" aria-label="Schnellzugriff">
+    <button id="waLocation" class="btn primary" type="button">📍 Standort an Hans senden</button>
+    <button id="waLost" class="btn warn" type="button">🚶 Ich habe mich verlaufen</button>
+    <button id="waLuggageHere" class="btn servicebtn" type="button">🎒 Gepäcktransport hierher</button>
     <a href="#fruehstueck" class="btn primary">☕ Frühstück per SMS</a>
     <a href="#abendessen" class="btn primary">🍽️ Abendessen vorbestellen</a>
     <a href="tel:+436646437526" class="btn">📞 Hans anrufen</a>
@@ -30,6 +33,7 @@
       <a class="tile" href="#heute"><span>🌦️</span><b>Heute</b><small>Wetter & offen</small></a>
       <a class="tile" href="#karte"><span>🗺️</span><b>Karte</b><small>Route & Orientierung</small></a>
       <a class="tile" href="#gepaeck"><span>🎒</span><b>Gepäck</b><small>Wander-Service</small></a>
+      <a class="tile" href="#wanderhilfe"><span>🆘</span><b>Wanderhilfe</b><small>Standort senden</small></a>
       <a class="tile" href="#kontakt"><span>🏡</span><b>Service</b><small>Kontakt & Notfall</small></a>
     </section>
 
@@ -297,6 +301,22 @@
       <a class="linkbtn" href="mailto:johannprem@hotmail.com?subject=Zuhause%20am%20Bach%20-%20Wir%20moechten%20verbunden%20bleiben&body=Hallo%20Hans%20und%20Laura%2C%0A%0Awir%20moechten%20gerne%20Neuigkeiten%20von%20Zuhause%20am%20Bach%20erhalten.%0A%0ALiebe%20Gruesse">Per E-Mail vormerken</a>
     </section>
 
+    <section id="wanderhilfe" class="card helpcard">
+      <h2>🆘 Wanderhilfe & Standort an Hans senden</h2>
+      <p>Wenn ihr unterwegs unsicher seid, euch verlaufen habt oder Gepäck genau an einen Standort geliefert werden soll: Standortfreigabe am Handy erlauben, Button drücken, WhatsApp öffnet sich mit einem Google-Maps-Link an Hans.</p>
+      <p class="note"><b>Wichtig:</b> Bei akuter Gefahr bitte zuerst den Notruf wählen: Rettung 144, Polizei 133, Euro-Notruf 112.</p>
+      <div class="helpgrid">
+        <button id="waLocationCard" class="bighelp" type="button"><span>📍</span><b>Standort an Hans senden</b><small>Google-Maps-Link per WhatsApp</small></button>
+        <button id="waLostCard" class="bighelp warn" type="button"><span>🚶</span><b>Ich habe mich verlaufen</b><small>Hilfe mit aktuellem Standort anfragen</small></button>
+        <button id="waLuggageHereCard" class="bighelp servicebtn" type="button"><span>🎒</span><b>Gepäcktransport hierher</b><small>Lieferort mit GPS-Link senden</small></button>
+      </div>
+      <details class="howto"><summary>Was wird gesendet?</summary>
+        <p><b>Standort:</b> „Hallo Hans, hier ist mein aktueller Standort: [Google Maps Link]“</p>
+        <p><b>Verlaufen:</b> „Wir haben uns verlaufen und benötigen Hilfe. Unser Standort: [Google Maps Link]. Anzahl Personen: …“</p>
+        <p><b>Gepäck:</b> „Bitte Gepäck an folgenden Standort liefern: [Google Maps Link]. Name und Anzahl Gepäckstücke bitte ergänzen.“</p>
+      </details>
+    </section>
+
     <section id="kontakt" class="card service">
       <h2>📞 Kontakt & Notfall</h2>
       <div class="split">
@@ -313,7 +333,7 @@
             <li>Polizei: <a href="tel:133">133</a></li>
             <li>Ärztenotdienst: <a href="tel:141">141</a></li>
           </ul>
-          <button id="locationSms" class="btn primary" type="button">📍 Standort per SMS an Hans senden</button>
+          <button id="waLocationContact" class="btn primary" type="button">📍 Standort per WhatsApp an Hans senden</button>
           <p class="note">Bei akuter Gefahr immer zuerst den Notruf wählen.</p>
         </div>
       </div>

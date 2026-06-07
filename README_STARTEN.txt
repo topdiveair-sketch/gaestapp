@@ -1,20 +1,18 @@
-Zuhause am Bach Erlebnis-App V5.4
-=================================
+Zuhause am Bach Erlebnis-App V5.6
+===================================
 
 Start:
 1. ZIP entpacken.
-2. index.html öffnen.
-3. Für Veröffentlichung alle Dateien in einen Webordner laden, z.B. /gaesteapp/.
+2. index.html im Browser öffnen.
+3. Für Handy-Nutzung den Ordner auf die Webseite hochladen und per QR-Code verlinken.
 
-Neu in V5.4:
-- Heute-Bereich: Wetter, Heurigenkalender, Fähren, Wachaubahn.
-- Kartenbereich mit OpenStreetMap und Google-Maps-Buttons.
-- Gepäcktransport mit genauer Abholadresse, Zieladresse, Uhrzeit, Name und Gepäckanzahl per SMS.
-- Fähren & Übergänge als eigener Bereich.
-- Standort per SMS an Hans senden.
-- Gastgeber- und Windis-Geheimtipps.
+Neu in V5.6:
+- Standort an Hans per WhatsApp senden.
+- Button „Ich habe mich verlaufen“ mit Google-Maps-Standort.
+- Button „Gepäcktransport hierher“ mit Google-Maps-Standort.
 - Telefonnummer einheitlich: +43 664 6437526.
 
 Wichtig:
-Öffnungszeiten, Fähren, Wetter, Bahn und Heurige werden nicht automatisch in der App gespeichert.
-Die App verweist bewusst auf aktuelle externe Quellen, damit Gäste nicht mit alten Daten losgehen.
+Die Standort-Funktion funktioniert zuverlässig nur auf HTTPS-Webseiten oder lokal je nach Browserfreigabe.
+Der Gast muss die Standortfreigabe am Handy erlauben.
+Bei akuter Gefahr bitte immer zuerst Notruf wählen: 112 / 144 / 133.
