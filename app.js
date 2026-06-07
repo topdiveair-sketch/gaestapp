@@ -1,4 +1,4 @@
-const phone = '+4366464375826';
+const phone = '+436646437526';
 const form = document.getElementById('smsForm');
 if (form) {
   form.addEventListener('submit', (e) => {

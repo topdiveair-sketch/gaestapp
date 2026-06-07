@@ -1,23 +1,18 @@
-Zuhause am Bach Gäste-App V3
-============================
+Zuhause am Bach – Erlebnis-App V5.2
+===================================
 
-So startest du die App:
+Starten:
 1. ZIP entpacken.
-2. Datei index.html doppelklicken.
-3. Am Handy: Ordner auf Webspace/Google Drive/Hosting laden oder lokal öffnen.
-4. Für echte Installation als PWA muss die App über https:// erreichbar sein.
+2. index.html öffnen.
+3. Für Webseite alle Dateien gemeinsam in einen Ordner hochladen, z. B. /gaesteapp/.
+
+Korrekturen in V5.2:
+- Telefonnummer überall korrigiert auf +43 664 6437526 / 0664 6437526.
+- Frühstück, Gepäcktransport und Abendessen laufen per SMS an die richtige Nummer.
+- Google-Maps-Adresse: Aggsbach Markt 82, 3641 Aggsbach Markt.
+- Emmersdorf wurde aus der Nahversorger-Empfehlung entfernt.
+- Einkauf/Nahversorgung empfiehlt Melk oder Spitz und weist auf aktuelle Öffnungszeiten hin.
+- Heurigenkalender bleibt als aktueller Prüfbutton eingebaut.
 
 Wichtig:
-- Frühstück läuft per SMS an 0664 64375826.
-- Externe Links öffnen offizielle Infoseiten.
-- Öffnungszeiten, Fähren, Bahn und Wetter vor Ort immer aktuell prüfen.
-
-Nächste Ausbaustufen:
-- echte Fotos von Haus, Bach, Fidel, Gloria und Pia einfügen
-- QR-Code erstellen
-- Tourdaten mit GPX/Karten ergänzen
-- Buchungslink / Bewertungslink ergänzen
-- Impressum & Datenschutz als eigene Seite ergänzen
-
-
-Version 4.1: Startbild ohne verdeckende Schnellbuttons, damit Pia sichtbar bleibt; geprüfte offizielle Links für Welterbesteig, Donauradweg, VOR und Wachaubahn ergänzt.
+Öffnungszeiten, Aussteckzeiten, Fähren und Bahnzeiten ändern sich. Deshalb sind in der App bewusst Prüfbuttons und Hinweise eingebaut.
