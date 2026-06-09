@@ -20,3 +20,14 @@
   .assistant-options{grid-template-columns:repeat(2,1fr)}
   .trafficgrid{grid-template-columns:repeat(3,1fr)}
 }
+
+
+/* V6.1 Live & Inhaltsverbesserung */
+.livebox{background:#fff;border:1px solid rgba(107,79,42,.18);border-radius:22px;padding:16px;margin:14px 0;box-shadow:0 10px 24px rgba(43,33,24,.08)}
+.weathergrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
+.weatheritem{background:#f6ead9;border-radius:16px;padding:12px}
+.weatheritem b{display:block;font-size:.86rem;color:var(--muted)}
+.weatheritem span{font-size:1.22rem;font-weight:900}
+.live-service,.prearrival{background:linear-gradient(135deg,#fffaf2,#f4eadc)}
+.actions .linkbtn,.actions .btn{margin-top:6px}
+@media(min-width:760px){.weathergrid{grid-template-columns:repeat(4,1fr)}}

@@ -134,6 +134,65 @@ if (luggageForm) {
 
 bindWhatsAppLocationButtons();
 
+
+// V6.1 Live-Wetter über Open-Meteo, ohne API-Key
+function weatherCodeText(code){
+  const map = {
+    0:'Klar',1:'Überwiegend klar',2:'Teilweise bewölkt',3:'Bewölkt',
+    45:'Nebel',48:'Reifnebel',51:'Leichter Nieselregen',53:'Nieselregen',55:'Starker Nieselregen',
+    61:'Leichter Regen',63:'Regen',65:'Starker Regen',71:'Leichter Schnee',73:'Schnee',75:'Starker Schnee',
+    80:'Leichte Schauer',81:'Schauer',82:'Starke Schauer',95:'Gewitter',96:'Gewitter mit Hagel',99:'Starkes Gewitter mit Hagel'
+  };
+  return map[code] || 'Wetterlage';
+}
+
+function renderWeather(data){
+  const current = data.current || {};
+  const daily = data.daily || {};
+  const temp = current.temperature_2m;
+  const wind = current.wind_speed_10m;
+  const rain = current.rain ?? 0;
+  const code = current.weather_code;
+  const max = daily.temperature_2m_max?.[0];
+  const min = daily.temperature_2m_min?.[0];
+  const precip = daily.precipitation_sum?.[0];
+
+  const status = document.getElementById('weatherStatus');
+  const grid = document.getElementById('weatherGrid');
+  if (!status || !grid) return;
+
+  status.textContent = `Aktuell: ${weatherCodeText(code)}. Stand: ${current.time ? current.time.replace('T',' ') : 'jetzt'}`;
+  grid.innerHTML = `
+    <div class="weatheritem"><b>Temperatur</b><span>${temp ?? '–'} °C</span></div>
+    <div class="weatheritem"><b>Wind</b><span>${wind ?? '–'} km/h</span></div>
+    <div class="weatheritem"><b>Regen jetzt</b><span>${rain ?? '–'} mm</span></div>
+    <div class="weatheritem"><b>Heute</b><span>${min ?? '–'} / ${max ?? '–'} °C</span></div>
+    <div class="weatheritem"><b>Regen gesamt</b><span>${precip ?? '–'} mm</span></div>
+    <div class="weatheritem"><b>Warnlogik</b><span>${(precip || 0) > 5 ? 'Regenjacke' : 'normal prüfen'}</span></div>
+  `;
+}
+
+function loadWeather(){
+  const status = document.getElementById('weatherStatus');
+  if (status) status.textContent = 'Wetter wird geladen …';
+  const url = 'https://api.open-meteo.com/v1/forecast?latitude=48.2937&longitude=15.3960&current=temperature_2m,rain,weather_code,wind_speed_10m&daily=temperature_2m_max,temperature_2m_min,precipitation_sum&timezone=Europe%2FVienna&forecast_days=1';
+  fetch(url)
+    .then(r => {
+      if (!r.ok) throw new Error('Wetterdienst nicht erreichbar');
+      return r.json();
+    })
+    .then(renderWeather)
+    .catch(() => {
+      const status = document.getElementById('weatherStatus');
+      if (status) status.textContent = 'Live-Wetter konnte nicht geladen werden. Bitte Wetter-Link öffnen oder später neu laden.';
+    });
+}
+
+const reloadWeather = document.getElementById('reloadWeather');
+if (reloadWeather) reloadWeather.addEventListener('click', loadWeather);
+loadWeather();
+
+
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => navigator.serviceWorker.register('./service-worker.js').catch(()=>{}));
 }
@@ -175,32 +234,64 @@ Liebe Grüße`;
 }
 
 const tourTexts = {
-  short: `🌿 Pia empfiehlt: Kleine Abendrunde ab Zuhause am Bach.
+  short: `🌿 Kleine Runde ab Zuhause am Bach
 
-Gut für: Anreise, müde Beine, Kinder, kurze Frischluft.
-Vorher prüfen: Wetter und Licht.
-Tipp: Donau/Bach/Ort ruhig erkunden und nicht zu spät losgehen.`,
-  medium: `🥾 Pia empfiehlt: Aggsbach Markt Richtung Maria Langegg / Jauerling-Umfeld.
+Empfehlung:
+• Bach und Ort erkunden
+• Donauufer / ruhige Abendrunde
+• ideal nach Anreise oder bei wenig Zeit
 
-Gut für: 3–4 Stunden Natur, Wald und Aussicht.
-Vorher prüfen: Route, Wetter, Wasser und Rückweg.
-Tipp: Nicht unterschätzen – die Wachau kann in den Beinen deutlich werden.`,
-  day: `⛰️ Pia empfiehlt: Welterbesteig-Etappe.
+Dauer: ca. 30–90 Minuten je nach Variante.
+Mitnehmen: Handy, Licht bei Dämmerung, etwas Wasser.
+Pias Kommentar: Kurz heißt nicht langweilig. Kurz heißt: rechtzeitig wieder da.`,
 
-Gut für: geübte Wanderer mit Tagesplanung.
-Vorher prüfen: offizielle Route, Wetter, Öffis, Fähren und genug Wasser.
-Tipp: Früh starten. Die Donau wartet nicht, aber die Müdigkeit kommt sicher.`,
-  kids: `🎒 Pia empfiehlt: Kurze Entdeckerrunde.
+  medium: `🥾 Halbtageswanderung rund um Aggsbach Markt
 
-Aufgabe: Findet Donau, Blume, Stein, Marillenbaum und einen schönen Fotopunkt.
-Gut für: Kinder, Familien und alle, die lieber staunen als hetzen.`,
-  dog: `🐕 Pia empfiehlt: Schatten, Wasser, Pausen.
+Empfehlung:
+• Richtung Maria Langegg / Jauerling-Umfeld
+• Wald, Aussicht, Wachau-Gefühl
+• nur bei passendem Wetter und gutem Schuhwerk
 
-Vorher prüfen: Hitze, Asphalt, Zecken, Leinenpflicht und Trinkwasser.
-Tipp: Für Hunde ist die schönste Tour nicht die längste, sondern die kühlste.`
+Dauer: grob 3–4 Stunden je nach Route.
+Vorher prüfen: Wetter, Rückweg, Wasser.
+Wichtig: Nicht blind los. Die Wachau schaut lieb aus, hat aber Höhenmeter.`,
+
+  day: `⛰️ Welterbesteig-Etappe Aggsbach Markt → Emmersdorf
+
+Empfehlung:
+• offizielle Welterbesteig-Etappe prüfen
+• früh starten
+• Rückfahrt oder Gepäcktransport vorher klären
+
+Dauer: Tagesplanung.
+Mitnehmen: Wasser, Regen-/Sonnenschutz, Akku, Jause.
+Pias Kommentar: Wer groß geht, soll klug starten.`,
+
+  kids: `🎒 Kinderfreundliche Entdeckerrunde
+
+Aufgabe:
+• Findet die Donau
+• Findet eine Blume
+• Findet einen Marillenbaum
+• Findet einen schönen Stein
+• Macht ein Windis-Foto
+
+Dauer: 30–60 Minuten.
+Ziel: Freude statt Gewaltmarsch.`,
+
+  dog: `🐕 Mit Hund unterwegs
+
+Empfehlung:
+• kurze kühle Strecken
+• Schatten und Wasser planen
+• heißen Asphalt vermeiden
+• Leine und Rücksicht selbstverständlich
+
+Wichtig: Bei Hitze lieber Abendrunde statt Tagesmarsch.
+Pia sagt: Ein Hund braucht keinen Rekord. Er braucht Wasser.`
 };
 
-document.querySelectorAll('.tourchoice').forEach(btn => {
+document.querySelectorAll('.tourchoice')document.querySelectorAll('.tourchoice').forEach(btn => {
   btn.addEventListener('click', () => {
     const box = document.getElementById('tourResult');
     if (box) box.textContent = tourTexts[btn.dataset.tour] || 'Keine Empfehlung gefunden.';
@@ -210,27 +301,48 @@ document.querySelectorAll('.tourchoice').forEach(btn => {
 const bikeTexts = {
   melk: `🏛️ Richtung Melk
 
-Grob geeignet für: Kultur, Bahnhof, Stift Melk, feste Donauquerung.
-Vorher prüfen: Radroute, Wetter, Verkehr und Rückfahrt.
-Tipp: Ideal, wenn Fähren unsicher sind.`,
+Gut für:
+• Stift Melk
+• Bahnhof Melk
+• feste Donauquerung über die Brücke
+• Rückfahrt/Weiterreise
+
+Tipp: Wenn Fähren unsicher sind, ist Melk oft die solidere Planung.`,
+
   spitz: `🍇 Richtung Spitz
 
-Grob geeignet für: Genussradler, Weinorte, Donau und Fähre Spitz–Arnsdorf.
-Vorher prüfen: Fähre und Rückfahrt.
-Tipp: Sehr schöne Wachau-Stimmung, viele Fotopausen einplanen.`,
+Gut für:
+• Weinorte
+• Donaupanorama
+• Fähre Spitz–Arnsdorf
+• Genussradeln
+
+Vorher prüfen: Fährbetrieb und Rückweg.
+Tipp: Fotopausen einplanen. Die Wachau drängelt nicht.`,
+
   duernstein: `🏰 Richtung Dürnstein
 
-Grob geeignet für: Wachau-Klassiker, Altstadt, Ruine, Fotos.
-Vorher prüfen: Strecke, Hitze, Betrieb der Fähren und Rückfahrt.
-Tipp: Früh fahren, Dürnstein kann voll werden.`,
+Gut für:
+• Klassiker der Wachau
+• Altstadt und Ruine
+• starke Fotos
+
+Vorher prüfen: Hitze, Verkehr, Rückfahrt.
+Tipp: Früh losfahren. Dürnstein ist schön, aber selten menschenleer.`,
+
   krems: `🏙️ Richtung Krems
 
-Grob geeignet für: längere Radtour, Stadt, Bahnhof, Altstadt.
-Vorher prüfen: Kondition, Windrichtung und Rücktransport.
-Tipp: Für Rückfahrt Öffis oder Abholung vorher klären.`
+Gut für:
+• längere Radtour
+• Bahnhof
+• Altstadt
+• Rückreise mit Öffis
+
+Vorher prüfen: Kondition, Windrichtung, Bahn/Bus.
+Tipp: Bei Gegenwind wird aus Romantik schnell Arbeit.`
 };
 
-document.querySelectorAll('.bikechoice').forEach(btn => {
+document.querySelectorAll('.bikechoice')document.querySelectorAll('.bikechoice').forEach(btn => {
   btn.addEventListener('click', () => {
     const box = document.getElementById('bikeResult');
     if (box) box.textContent = bikeTexts[btn.dataset.bike] || 'Kein Ziel gefunden.';
