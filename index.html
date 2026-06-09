@@ -35,12 +35,113 @@
       <a class="tile" href="#gepaeck"><span>🎒</span><b>Gepäck</b><small>Wander-Service</small></a>
       <a class="tile" href="#wanderhilfe"><span>🆘</span><b>Wanderhilfe</b><small>Standort senden</small></a>
       <a class="tile" href="#kontakt"><span>🏡</span><b>Service</b><small>Kontakt & Notfall</small></a>
+      <a class="tile highlight" href="#bewertung"><span>⭐</span><b>Bewerten</b><small>Google & Booking</small></a>
+      <a class="tile highlight" href="#wanderassistent"><span>🧭</span><b>Tour finden</b><small>Wandern heute</small></a>
+      <a class="tile highlight" href="#radassistent"><span>🚲</span><b>Rad-Assistent</b><small>Melk, Spitz, Krems</small></a>
+      <a class="tile highlight" href="#kinderbereich"><span>🎨</span><b>Kinder</b><small>Windis-Spielbereich</small></a>
     </section>
 
     <section class="card intro">
       <h2>Willkommen daheim am Bach</h2>
       <p>Schön, dass ihr da seid. Diese App ist kein kaltes Hotel-Verzeichnis. Sie ist euer kleiner Wachau-Kompass – persönlich, praktisch und mit drei Windhund-Nasen geprüft.</p>
       <p class="note"><b>Hinweis:</b> Öffnungszeiten, Fähren, Bahnzeiten und Wetter bitte vor dem Start aktuell prüfen. Die Wachau ist schön – aber sie hält sich nicht immer an Pläne.</p>
+    </section>
+
+
+    <section id="v6start" class="card v6hero">
+      <p class="kicker">Version 6.0</p>
+      <h2>✨ Schnell, persönlich, wachautauglich</h2>
+      <p>Diese Gäste-App ist euer digitaler Begleiter vor Ort: Frühstück bestellen, Tour wählen, Fähren prüfen, Hilfe holen, bewerten und die Wilden Wachauer Windis entdecken.</p>
+      <div class="actions">
+        <a class="linkbtn primary" href="#fruehstueck-express">☕ Frühstück Express</a>
+        <a class="linkbtn primary" href="#wanderassistent">🧭 Wanderung finden</a>
+        <a class="linkbtn primary" href="#bewertung">⭐ Bewertung abgeben</a>
+      </div>
+    </section>
+
+    <section id="bewertung" class="card reviewcard">
+      <h2>⭐ Hat es euch gefallen?</h2>
+      <p>Eine Bewertung hilft kleinen Gastgebern mehr als jede große Werbung. Danke, wenn ihr euch eine Minute Zeit nehmt.</p>
+      <div class="routegrid linkgrid">
+        <article>
+          <h3>Google Bewertung</h3>
+          <p>Bitte nach dem Aufenthalt eine Bewertung für Zuhause am Bach schreiben.</p>
+          <a class="linkbtn primary" target="_blank" rel="noopener" href="https://www.google.com/search?q=Zuhause+am+Bach+Aggsbach+Markt+82+Bewertung">⭐ Google öffnen</a>
+        </article>
+        <article>
+          <h3>Booking Bewertung</h3>
+          <p>Falls ihr über Booking gebucht habt, erscheint die Bewertungsmöglichkeit nach dem Check-out im Booking-Konto.</p>
+          <a class="linkbtn" target="_blank" rel="noopener" href="https://www.booking.com/">Booking öffnen</a>
+        </article>
+      </div>
+      <p class="note">Hinweis: Den endgültigen direkten Google-Bewertungslink kann Hans später einfügen, sobald der passende Google-Business-Profil-Link vorliegt.</p>
+    </section>
+
+    <section id="fruehstueck-express" class="card breakfast express">
+      <h2>☕ Frühstück Express</h2>
+      <p>Zwei Klicks genügen. Auswahl treffen, Uhrzeit wählen, WhatsApp öffnet sich automatisch.</p>
+      <div class="buttonrow" role="group" aria-label="Frühstücksart">
+        <button class="choice active" data-group="breakfastType" data-value="Standard-Frühstück">Standard</button>
+        <button class="choice" data-group="breakfastType" data-value="Vegetarisches Frühstück">Vegetarisch</button>
+        <button class="choice" data-group="breakfastType" data-value="Veganes Frühstück">Vegan</button>
+      </div>
+      <div class="buttonrow" role="group" aria-label="Frühstückszeit">
+        <button class="choice active" data-group="breakfastTime" data-value="08:00 Uhr">08:00</button>
+        <button class="choice" data-group="breakfastTime" data-value="08:30 Uhr">08:30</button>
+        <button class="choice" data-group="breakfastTime" data-value="09:00 Uhr">09:00</button>
+      </div>
+      <div class="buttonrow" role="group" aria-label="Personen">
+        <button class="choice" data-group="breakfastPeople" data-value="1 Person">1 Person</button>
+        <button class="choice active" data-group="breakfastPeople" data-value="2 Personen">2 Personen</button>
+      </div>
+      <button id="waBreakfastExpress" class="btn primary" type="button">☕ Frühstück per WhatsApp bestellen</button>
+    </section>
+
+    <section id="wanderassistent" class="card assistantcard">
+      <h2>🧭 Welche Wanderung passt heute?</h2>
+      <p>Pia hilft bei der schnellen Auswahl. Wählt, was zu euren Beinen passt.</p>
+      <div class="assistant-options">
+        <button class="bighelp tourchoice" data-tour="short"><span>🌿</span><b>1–2 Stunden</b><small>Kleine Runde, ideal nach Anreise</small></button>
+        <button class="bighelp tourchoice" data-tour="medium"><span>🥾</span><b>3–4 Stunden</b><small>Wald, Aussicht, Wachau-Gefühl</small></button>
+        <button class="bighelp tourchoice" data-tour="day"><span>⛰️</span><b>Ganztagestour</b><small>Welterbesteig, gute Planung nötig</small></button>
+        <button class="bighelp tourchoice" data-tour="kids"><span>🎒</span><b>Mit Kindern</b><small>Kurz, spannend, nicht zu steil</small></button>
+        <button class="bighelp tourchoice" data-tour="dog"><span>🐕</span><b>Mit Hund</b><small>Wasser, Schatten, Pausen beachten</small></button>
+      </div>
+      <div id="tourResult" class="resultbox" aria-live="polite">Wählt eine Tour-Art aus.</div>
+    </section>
+
+    <section id="radassistent" class="card assistantcard">
+      <h2>🚲 Donauradweg-Assistent</h2>
+      <p>Fidel sortiert die wichtigsten Richtungen. Zeiten sind grobe Orientierung – bitte Navigation aktuell prüfen.</p>
+      <div class="assistant-options">
+        <button class="bighelp bikechoice" data-bike="melk"><span>🏛️</span><b>Melk</b><small>Stift, Bahnhof, Brücke</small></button>
+        <button class="bighelp bikechoice" data-bike="spitz"><span>🍇</span><b>Spitz</b><small>Wein, Fähre, Donau</small></button>
+        <button class="bighelp bikechoice" data-bike="duernstein"><span>🏰</span><b>Dürnstein</b><small>Klassiker der Wachau</small></button>
+        <button class="bighelp bikechoice" data-bike="krems"><span>🏙️</span><b>Krems</b><small>Stadt, Bahnhof, Altstadt</small></button>
+      </div>
+      <div id="bikeResult" class="resultbox" aria-live="polite">Wählt ein Ziel aus.</div>
+    </section>
+
+    <section id="faehrenampel" class="card ferrycard">
+      <h2>⛴️ Fähren-Ampel</h2>
+      <p>Die App kann den Fährbetrieb nicht automatisch garantieren. Darum gibt es hier eine klare Prüfliste.</p>
+      <div class="trafficgrid">
+        <article><b>🟢 Grün</b><p>Fähre laut aktueller Seite in Betrieb.</p></article>
+        <article><b>🟡 Gelb</b><p>Wetter, Wasserstand, Saison oder Mittagspause beachten.</p></article>
+        <article><b>🔴 Rot</b><p>Alternative planen: Wachaubahn, Bus, Taxi oder Melker Brücke.</p></article>
+      </div>
+      <a class="linkbtn primary" target="_blank" rel="noopener" href="https://www.spitz-wachau.com/oeffis-faehren">⛴️ Fähren jetzt prüfen</a>
+    </section>
+
+    <section id="kinderbereich" class="card windis-kids">
+      <h2>🎨 Windis-Kinderbereich</h2>
+      <p>Für kleine Gäste und müde Eltern: drei schnelle Beschäftigungen mit Fidel, Gloria und Pia.</p>
+      <div class="routegrid">
+        <article><h3>🐾 Wachau-Quiz</h3><p>Was wächst in der Wachau? Marillen, Wein und Geschichten.</p><button id="quizBtn" class="btn" type="button">Quizfrage anzeigen</button><p id="quizText" class="resultbox smallresult">Bereit?</p></article>
+        <article><h3>🔎 Mini-Schatzsuche</h3><p>Findet beim Spaziergang: eine Marille, einen Zug, die Donau, eine Blume und einen Stein in Herzform.</p></article>
+        <article><h3>📚 Vorlese-Moment</h3><p>Fidel liest Fahrpläne, Gloria hält Ordnung, Pia sucht Abenteuer. So beginnt fast jede gute Windis-Geschichte.</p></article>
+        <article><h3>🎨 Ausmalidee</h3><p>Zeichnet Pia mit rotem Halstuch auf dem Welterbesteig. Wer mag, zeigt das Bild Hans und Laura.</p></article>
+      </div>
     </section>
 
     <section id="heute" class="card today">
@@ -360,6 +461,7 @@
     <a href="#radfahren">🚲<span>Rad</span></a>
     <a href="#gepaeck">🎒<span>Gepäck</span></a>
     <a href="#kontakt">📞<span>Kontakt</span></a>
+    <a href="#bewertung">⭐<span>Bewerten</span></a>
   </nav>
 
   <script src="app.js"></script>

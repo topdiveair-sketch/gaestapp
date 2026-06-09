@@ -137,3 +137,117 @@ bindWhatsAppLocationButtons();
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => navigator.serviceWorker.register('./service-worker.js').catch(()=>{}));
 }
+
+
+// V6.0 Interaktive Assistenten
+const v6State = {
+  breakfastType: 'Standard-Frühstück',
+  breakfastTime: '08:00 Uhr',
+  breakfastPeople: '2 Personen'
+};
+
+document.querySelectorAll('.choice').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const group = btn.dataset.group;
+    v6State[group] = btn.dataset.value;
+    document.querySelectorAll(`.choice[data-group="${group}"]`).forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+
+const breakfastBtn = document.getElementById('waBreakfastExpress');
+if (breakfastBtn) {
+  breakfastBtn.addEventListener('click', () => {
+    const text = `Hallo Hans und Laura,
+
+wir möchten für morgen Frühstück bestellen.
+
+Art: ${v6State.breakfastType}
+Zeit: ${v6State.breakfastTime}
+Personen: ${v6State.breakfastPeople}
+
+Besondere Wünsche:
+_____
+
+Liebe Grüße`;
+    openWhatsApp(text);
+  });
+}
+
+const tourTexts = {
+  short: `🌿 Pia empfiehlt: Kleine Abendrunde ab Zuhause am Bach.
+
+Gut für: Anreise, müde Beine, Kinder, kurze Frischluft.
+Vorher prüfen: Wetter und Licht.
+Tipp: Donau/Bach/Ort ruhig erkunden und nicht zu spät losgehen.`,
+  medium: `🥾 Pia empfiehlt: Aggsbach Markt Richtung Maria Langegg / Jauerling-Umfeld.
+
+Gut für: 3–4 Stunden Natur, Wald und Aussicht.
+Vorher prüfen: Route, Wetter, Wasser und Rückweg.
+Tipp: Nicht unterschätzen – die Wachau kann in den Beinen deutlich werden.`,
+  day: `⛰️ Pia empfiehlt: Welterbesteig-Etappe.
+
+Gut für: geübte Wanderer mit Tagesplanung.
+Vorher prüfen: offizielle Route, Wetter, Öffis, Fähren und genug Wasser.
+Tipp: Früh starten. Die Donau wartet nicht, aber die Müdigkeit kommt sicher.`,
+  kids: `🎒 Pia empfiehlt: Kurze Entdeckerrunde.
+
+Aufgabe: Findet Donau, Blume, Stein, Marillenbaum und einen schönen Fotopunkt.
+Gut für: Kinder, Familien und alle, die lieber staunen als hetzen.`,
+  dog: `🐕 Pia empfiehlt: Schatten, Wasser, Pausen.
+
+Vorher prüfen: Hitze, Asphalt, Zecken, Leinenpflicht und Trinkwasser.
+Tipp: Für Hunde ist die schönste Tour nicht die längste, sondern die kühlste.`
+};
+
+document.querySelectorAll('.tourchoice').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const box = document.getElementById('tourResult');
+    if (box) box.textContent = tourTexts[btn.dataset.tour] || 'Keine Empfehlung gefunden.';
+  });
+});
+
+const bikeTexts = {
+  melk: `🏛️ Richtung Melk
+
+Grob geeignet für: Kultur, Bahnhof, Stift Melk, feste Donauquerung.
+Vorher prüfen: Radroute, Wetter, Verkehr und Rückfahrt.
+Tipp: Ideal, wenn Fähren unsicher sind.`,
+  spitz: `🍇 Richtung Spitz
+
+Grob geeignet für: Genussradler, Weinorte, Donau und Fähre Spitz–Arnsdorf.
+Vorher prüfen: Fähre und Rückfahrt.
+Tipp: Sehr schöne Wachau-Stimmung, viele Fotopausen einplanen.`,
+  duernstein: `🏰 Richtung Dürnstein
+
+Grob geeignet für: Wachau-Klassiker, Altstadt, Ruine, Fotos.
+Vorher prüfen: Strecke, Hitze, Betrieb der Fähren und Rückfahrt.
+Tipp: Früh fahren, Dürnstein kann voll werden.`,
+  krems: `🏙️ Richtung Krems
+
+Grob geeignet für: längere Radtour, Stadt, Bahnhof, Altstadt.
+Vorher prüfen: Kondition, Windrichtung und Rücktransport.
+Tipp: Für Rückfahrt Öffis oder Abholung vorher klären.`
+};
+
+document.querySelectorAll('.bikechoice').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const box = document.getElementById('bikeResult');
+    if (box) box.textContent = bikeTexts[btn.dataset.bike] || 'Kein Ziel gefunden.';
+  });
+});
+
+const quiz = [
+  'Frage: Wofür ist die Wachau besonders bekannt? Antwort: Marillen, Wein, Donau und schöne Wege.',
+  'Frage: Wer trägt bei den Windis ein rotes Halstuch? Antwort: Pia.',
+  'Frage: Was sollte man vor einer Wanderung prüfen? Antwort: Wetter, Wasser, Route und Rückweg.',
+  'Frage: Welcher Fluss prägt die Wachau? Antwort: Die Donau.'
+];
+const quizBtn = document.getElementById('quizBtn');
+if (quizBtn) {
+  quizBtn.addEventListener('click', () => {
+    const box = document.getElementById('quizText');
+    const item = quiz[Math.floor(Math.random() * quiz.length)];
+    if (box) box.textContent = item;
+  });
+}
