@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#6b4f2a" />
   <title>Zuhause am Bach – Wachau mit Fidel, Gloria & Pia</title>
+  <meta name="description" content="Digitale Gäste-App von Zuhause am Bach in Aggsbach Markt: Wetter, Wandern, Donauradweg, Frühstück, Gepäcktransport, Notfallkontakte und Wachau-Tipps." />
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -48,7 +49,49 @@
     </section>
 
 
-    <section id="v6start" class="card v6hero">
+    
+<section id="funktioniert-jetzt" class="card">
+  <h2>✅ Funktionierende Schnellassistenten</h2>
+  <p>Hier sind die wichtigsten Funktionen nochmals als robuste Version eingebaut: Tour wählen, Radtour wählen, Wetterhinweis anzeigen und Windis-Kinderbereich starten.</p>
+
+  <h3>🥾 Welche Wanderung passt heute?</h3>
+  <div class="assistant-options">
+    <button class="bighelp js-tour" data-result="🌿 Kleine Runde ab Zuhause am Bach&#10;&#10;Dauer: 30–90 Minuten.&#10;Ideal: nach Anreise, mit Kindern, bei unsicherem Wetter.&#10;Route: Bach – Ort – Donauufer – zurück.&#10;Tipp von Pia: Nicht weit ist manchmal genau richtig.">🌿 1–2 Stunden</button>
+    <button class="bighelp js-tour" data-result="🥾 Halbtagesrunde / Maria-Langegg-Richtung&#10;&#10;Dauer: ca. 3–4 Stunden je nach Variante.&#10;Ideal: Wald, Aussicht, Wachau-Gefühl.&#10;Wichtig: Wasser, gutes Schuhwerk, Rückweg prüfen.">🥾 3–4 Stunden</button>
+    <button class="bighelp js-tour" data-result="⛰️ Welterbesteig Aggsbach Markt → Emmersdorf&#10;&#10;Offizielle Eckdaten: ca. 14,74 km, ca. 5 Stunden, mittel.&#10;Wichtig: früh starten, Wetter prüfen, Rückfahrt klären.">⛰️ Ganztag</button>
+    <button class="bighelp js-tour" data-result="🎒 Mit Kindern&#10;&#10;Empfehlung: kurze Entdeckerrunde.&#10;Aufgabe: Donau, Blume, Marillenbaum, Zug und schönen Stein finden.&#10;Ziel: Spaß statt Gewaltmarsch.">🎒 Mit Kindern</button>
+    <button class="bighelp js-tour" data-result="🐕 Mit Hund&#10;&#10;Empfehlung: kühl, schattig, kurz.&#10;Wasser mitnehmen, heißen Asphalt vermeiden, Pausen einplanen.&#10;Pia sagt: Ein Hund braucht keinen Rekord, sondern Wasser.">🐕 Mit Hund</button>
+  </div>
+  <div id="fixedTourResult" class="resultbox">Bitte eine Wanderart auswählen.</div>
+
+  <h3>🚲 Donauradweg-Assistent</h3>
+  <div class="assistant-options">
+    <button class="bighelp js-bike" data-result="🏛️ Richtung Melk&#10;&#10;Gut für Stift Melk, Bahnhof Melk und feste Donauquerung.&#10;Empfehlung bei unsicherem Fährbetrieb.">Melk</button>
+    <button class="bighelp js-bike" data-result="🍇 Richtung Spitz&#10;&#10;Gut für Weinorte, Donaupanorama und Fähre Spitz–Arnsdorf.&#10;Vorher Fährbetrieb prüfen.">Spitz</button>
+    <button class="bighelp js-bike" data-result="🏰 Richtung Dürnstein&#10;&#10;Der Wachau-Klassiker: Altstadt, Ruine, Fotos.&#10;Früh starten, weil es dort voll werden kann.">Dürnstein</button>
+    <button class="bighelp js-bike" data-result="🏙️ Richtung Krems&#10;&#10;Längere Tour mit Altstadt und Bahnhof.&#10;Windrichtung und Rücktransport prüfen.">Krems</button>
+  </div>
+  <div id="fixedBikeResult" class="resultbox">Bitte ein Radziel auswählen.</div>
+
+  <h3>🌦️ Wetterhilfe</h3>
+  <p>Falls das Live-Wetter nicht lädt, liegt es meist an fehlendem Internet, Browser-Sperre oder lokal geöffneter Datei. Dann bitte über HTTPS/GitHub Pages öffnen.</p>
+  <div class="actions">
+    <button id="fixedWeatherAdvice" class="btn primary" type="button">🌦️ Wetter-Hinweis anzeigen</button>
+    <a class="linkbtn" target="_blank" rel="noopener" href="https://www.wetter.com/oesterreich/aggsbach-markt/ATAT10497001.html">Externes Wetter öffnen</a>
+  </div>
+  <div id="fixedWeatherResult" class="resultbox">Noch kein Hinweis angezeigt.</div>
+
+  <h3>🐾 Windis-Kinderbereich – richtig nutzbar</h3>
+  <div class="assistant-options">
+    <button class="bighelp js-kid" data-result="Quizfrage 1: Was wächst in der Wachau besonders berühmt?&#10;&#10;Antwort: Marillen und Wein.">🐾 Quiz 1</button>
+    <button class="bighelp js-kid" data-result="Quizfrage 2: Welcher Fluss fließt durch die Wachau?&#10;&#10;Antwort: Die Donau.">🐾 Quiz 2</button>
+    <button class="bighelp js-kid" data-result="Schatzsuche: Findet heute fünf Dinge: Donau, Zug, Marillenbaum, Blume und Stein in Herzform.">🔎 Schatzsuche</button>
+    <button class="bighelp js-kid" data-result="Vorlese-Moment: Pia will losrennen, Fidel liest zuerst den Fahrplan, Gloria packt Wasser ein. Und genau deshalb kommen am Ende alle gut an.">📚 Vorlese-Moment</button>
+  </div>
+  <div id="fixedKidResult" class="resultbox">Bitte Quiz, Schatzsuche oder Vorlese-Moment auswählen.</div>
+</section>
+
+<section id="v6start" class="card v6hero">
       <p class="kicker">Version 6.0</p>
       <h2>✨ Schnell, persönlich, wachautauglich</h2>
       <p>Diese Gäste-App ist euer digitaler Begleiter vor Ort: Frühstück bestellen, Tour wählen, Fähren prüfen, Hilfe holen, bewerten und die Wilden Wachauer Windis entdecken.</p>
@@ -125,6 +168,37 @@
       <button id="waBreakfastExpress" class="btn primary" type="button">☕ Frühstück per WhatsApp bestellen</button>
     </section>
 
+
+    <section id="touren-direkt" class="card tours">
+      <h2>🥾 Touren direkt ab Zuhause am Bach</h2>
+      <p>Diese Touren sind für Gäste am wichtigsten. Die Daten sind als Orientierung eingebaut; vor dem Start bitte Wetter, Kondition und Rückweg prüfen.</p>
+      <div class="routegrid linkgrid">
+        <article>
+          <h3>Welterbesteig 06: Maria Laach → Aggsbach Markt</h3>
+          <p><b>Ca. 7 km.</b> Gute Anreisetappe bergab Richtung Donau. Geeignet, wenn Gäste von Maria Laach zu uns kommen.</p>
+          <a class="linkbtn" target="_blank" rel="noopener" href="https://www.donau.com/touren/welterbesteig-wachau-06-maria-laach-aggsbach-markt-naturpark-jauerling-wachau">Offizielle Tour öffnen</a>
+          <a class="linkbtn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/Maria+Laach+am+Jauerling/Aggsbach+Markt+82+3641+Aggsbach+Markt">Route grob planen</a>
+        </article>
+        <article>
+          <h3>Welterbesteig 07: Aggsbach Markt → Emmersdorf</h3>
+          <p><b>Ca. 14,74 km, 5:00 h, mittel, ca. 547 hm Aufstieg.</b> Große Etappe über den Naturpark Jauerling-Wachau.</p>
+          <a class="linkbtn primary" target="_blank" rel="noopener" href="https://www.donau.com/touren/welterbesteig-wachau-07-aggsbach-markt-emmersdorf-naturpark-jauerling-wachau">Offizielle Etappe öffnen</a>
+          <a class="linkbtn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/Aggsbach+Markt+82+3641+Aggsbach+Markt/Emmersdorf+an+der+Donau">Route grob planen</a>
+        </article>
+        <article>
+          <h3>Kleine Ankunftsrunde</h3>
+          <p><b>30–90 Minuten.</b> Bach, Ort, Donauufer. Ideal nach Anreise, mit Kindern oder bei unsicherem Wetter.</p>
+          <a class="linkbtn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/Donauufer+Aggsbach+Markt">Donauufer suchen</a>
+        </article>
+        <article>
+          <h3>Richtung Spitz / Fähre Arnsdorf</h3>
+          <p>Für Radfahrer und Wanderer mit Donauquerung. Vorher Fähre prüfen.</p>
+          <a class="linkbtn" target="_blank" rel="noopener" href="https://www.spitz-wachau.at/Rollfaehre_Spitz-Arnsdorf">Fähre Spitz–Arnsdorf prüfen</a>
+          <a class="linkbtn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/Aggsbach+Markt+82+3641+Aggsbach+Markt/Spitz+an+der+Donau">Route nach Spitz planen</a>
+        </article>
+      </div>
+    </section>
+
     <section id="wanderassistent" class="card assistantcard">
       <h2>🧭 Welche Wanderung passt heute?</h2>
       <p>Pia hilft bei der schnellen Auswahl. Wählt, was zu euren Beinen passt.</p>
@@ -172,7 +246,7 @@
       <h2>🎨 Windis-Kinderbereich</h2>
       <p>Für kleine Gäste und müde Eltern: drei schnelle Beschäftigungen mit Fidel, Gloria und Pia.</p>
       <div class="routegrid">
-        <article><h3>🐾 Wachau-Quiz</h3><p>Was wächst in der Wachau? Marillen, Wein und Geschichten.</p><button id="quizBtn" class="btn" type="button">Quizfrage anzeigen</button><p id="quizText" class="resultbox smallresult">Bereit?</p></article>
+        <article><h3>🐾 Wachau-Quiz</h3><p>Was wächst in der Wachau? Marillen, Wein und Geschichten.</p><button id="quizBtn" class="btn" type="button">Quizfrage anzeigen</button><p id="quizText" class="resultbox smallresult">Drücke „Quizfrage anzeigen“. Falls nichts passiert, nutze unten den neuen funktionierenden Kinderbereich.</p></article>
         <article><h3>🔎 Mini-Schatzsuche</h3><p>Findet beim Spaziergang: eine Marille, einen Zug, die Donau, eine Blume und einen Stein in Herzform.</p></article>
         <article><h3>📚 Vorlese-Moment</h3><p>Fidel liest Fahrpläne, Gloria hält Ordnung, Pia sucht Abenteuer. So beginnt fast jede gute Windis-Geschichte.</p></article>
         <article><h3>🎨 Ausmalidee</h3><p>Zeichnet Pia mit rotem Halstuch auf dem Welterbesteig. Wer mag, zeigt das Bild Hans und Laura.</p></article>
@@ -290,7 +364,7 @@
         <article><h3>Etappe Aggsbach Markt–Emmersdorf</h3><p>Direkt relevante Welterbesteig-Etappe ab Aggsbach Markt.</p><a class="linkbtn" target="_blank" rel="noopener" href="https://www.donau.com/touren/welterbesteig-wachau-07-aggsbach-markt-emmersdorf-naturpark-jauerling-wachau">Öffnen</a></article>
         <article><h3>Donauradweg</h3><p>Offizielle Übersicht zum Donauradweg und den Etappen.</p><a class="linkbtn" target="_blank" rel="noopener" href="https://www.donau.com/donauradweg">Öffnen</a></article>
         <article><h3>Mobil in der Wachau</h3><p>Bus, Bahn und öffentliche Anreise in die Wachau.</p><a class="linkbtn" target="_blank" rel="noopener" href="https://www.vor.at/wachau">Öffnen</a></article>
-        <article><h3>Wachaubahn Fahrplan</h3><p>Saisonale Bahnzeiten vor dem Ausflug prüfen.</p><a class="linkbtn" target="_blank" rel="noopener" href="https://www.wachaubahn.at/whb-fahrplan">Öffnen</a></article>
+        <article><h3>Wachaubahn Tagesfahrplan</h3><p>Saisonale Bahnzeiten vor dem Ausflug prüfen.</p><a class="linkbtn" target="_blank" rel="noopener" href="https://www.wachaubahn.at/tagesaktueller-fahrplan">Öffnen</a></article>
         <article><h3>Heurigenkalender Aggsbach</h3><p><b>Aktuell prüfen, wer heute ausgesteckt hat.</b> Heurige ändern ihre Öffnungs- und Aussteckzeiten laufend.</p><a class="linkbtn" target="_blank" rel="noopener" href="https://heurigenkalender.niederoesterreich.at/Gemeinde/31301/Aggsbach">🍷 Heute offene Heurige prüfen</a></article>
         <article><h3>Windis-Bücher</h3><p>Fidel, Gloria und Pia kennenlernen und Bücher entdecken.</p><a class="linkbtn" target="_blank" rel="noopener" href="https://www.diewildenwachauerwindis.at/buecher-shop/die-wilden-wachauer-windis/">Zum Buchshop</a></article>
       </div>
@@ -441,7 +515,30 @@
       <p><a class="linkbtn" target="_blank" rel="noopener" href="https://www.diewildenwachauerwindis.at/buecher-shop/die-wilden-wachauer-windis/">📚 Zum Buchshop der Wilden Wachauer Windis</a></p>
     </section>
 
-    <section id="tipps" class="card">
+    
+<section id="empfehlung-gritsch" class="card">
+<h2>🍷 Gastgeber-Empfehlung: Donauschlössel Spitz</h2>
+<p>Eine persönliche Empfehlung von Hans, Laura, Fidel, Gloria und Pia.</p>
+<div class="routegrid">
+<article>
+<h3>Donauschlössel – Familie Graben-Gritsch</h3>
+<p>Direkt an der Donau in Spitz gelegen. Bekannt für Wachauer Gastlichkeit, regionale Küche und Weine des Weinguts Graben-Gritsch.</p>
+<ul>
+<li>✔ Sonnenterrasse an der Donau</li>
+<li>✔ Regionale warme und kalte Speisen</li>
+<li>✔ Hausgemachte Mehlspeisen</li>
+<li>✔ Wachauer Weine</li>
+<li>✔ Gut erreichbar mit Auto, Fahrrad und Wachaubahn</li>
+</ul>
+<p><b>Adresse:</b> Donaulände 3, 3620 Spitz</p>
+<p><b>Telefon:</b> +43 664 9156901</p>
+<p><a class="linkbtn primary" target="_blank" rel="noopener" href="https://donauschloessel.at/">🌐 Donauschlössel besuchen</a></p>
+<p class="note">Unsere Empfehlung nach einer Wanderung oder Radtour: Auf der Donauterrasse einkehren und die Wachau genießen.</p>
+</article>
+</div>
+</section>
+
+<section id="tipps" class="card">
       <h2>✨ Gastgeber- & Windis-Geheimtipps</h2>
       <div class="routegrid">
         <article><h3>Hans empfiehlt</h3><p>Wachaubahn, Bahnhöfe, alte Streckenblicke und alles, wo Technik und Landschaft zusammenkommen.</p></article>
@@ -505,6 +602,77 @@
 <h2>🐾 Die Wilden Wachauer Windis</h2>
 <p>Entdeckt Fidel, Gloria und Pia, ihre Bücher, Abenteuer und die Wachau aus Windhundsicht.</p>
 <a class="linkbtn" target="_blank" href="https://www.diewildenwachauerwindis.at/buecher-shop/die-wilden-wachauer-windis/">📚 Zu den Windis</a>
+</section>
+
+
+
+    <section id="livecheck" class="card">
+      <h2>✅ Live-Linkcheck</h2>
+      <p>Die wichtigsten externen Seiten wurden zusätzlich recherchiert und als direkte Links hinterlegt.</p>
+      <div class="trafficgrid">
+        <article><b>✅ Wachaubahn</b><p>Tagesaktueller Fahrplan vorhanden, Station Aggsbach Markt wird genannt.</p><a class="linkbtn" target="_blank" rel="noopener" href="https://www.wachaubahn.at/tagesaktueller-fahrplan">Öffnen</a></article>
+        <article><b>✅ Fähre Spitz–Arnsdorf</b><p>Direkte offizielle Seite vorhanden.</p><a class="linkbtn" target="_blank" rel="noopener" href="https://www.spitz-wachau.at/Rollfaehre_Spitz-Arnsdorf">Öffnen</a></article>
+        <article><b>✅ Fähre Weißenkirchen</b><p>Direkte Seite vorhanden; Betrieb kann bei Hochwasser/Sturm eingestellt werden.</p><a class="linkbtn" target="_blank" rel="noopener" href="https://www.weissenkirchen-wachau.at/ueber-weissenkirchen/mobilitaet/rollfaehre">Öffnen</a></article>
+        <article><b>✅ Heurigenkalender</b><p>Direkter Kalender für Aggsbach vorhanden.</p><a class="linkbtn" target="_blank" rel="noopener" href="https://heurigenkalender.niederoesterreich.at/Gemeinde/31301/Aggsbach">Öffnen</a></article>
+        <article><b>✅ Welterbesteig 07</b><p>Offizielle Tourdaten vorhanden.</p><a class="linkbtn" target="_blank" rel="noopener" href="https://www.donau.com/touren/welterbesteig-wachau-07-aggsbach-markt-emmersdorf-naturpark-jauerling-wachau">Öffnen</a></article>
+        <article><b>⚠ Google Bewertung</b><p>Direkter Review-Link fehlt weiterhin; braucht Google-Business-Review-Link oder Place-ID.</p></article>
+      </div>
+    </section>
+
+    <section id="appcheck" class="card">
+      <h2>🧪 App-Selbsttest</h2>
+      <p>Dieser Bereich prüft direkt im Browser, ob die wichtigsten App-Funktionen geladen sind.</p>
+      <button id="runSelfTest" class="btn primary" type="button">App jetzt prüfen</button>
+      <div id="selfTestResult" class="resultbox" aria-live="polite">Noch nicht geprüft.</div>
+    </section>
+
+
+<section id="wachau-premium" class="card">
+<h2>🌟 Wachau Premium Bereich – Version 7.0</h2>
+
+<h3>🎧 Pia erzählt die Wachau</h3>
+<ul>
+<li>Willkommen in Aggsbach Markt</li>
+<li>Die Donau</li>
+<li>Die Wachaubahn</li>
+<li>Der Welterbesteig</li>
+<li>Die Wachauer Marille</li>
+<li>Die Kartause Aggsbach</li>
+<li>Die Burgruine Aggstein</li>
+<li>Der Jauerling</li>
+</ul>
+
+<h3>🚂 Hans erzählt Eisenbahn</h3>
+<ul>
+<li>Geschichte der Wachaubahn</li>
+<li>Bahnhof Aggsbach Markt</li>
+<li>Bahnhof Spitz</li>
+<li>Bahnhof Emmersdorf</li>
+<li>Historische Eisenbahngeschichten</li>
+<li>Koralmtunnel aus Sicht eines Eisenbahners</li>
+</ul>
+
+<h3>📸 Die schönsten Fotopunkte</h3>
+<ul>
+<li>Donauufer Aggsbach Markt</li>
+<li>Jauerling</li>
+<li>Ruine Aggstein</li>
+<li>Dürnstein</li>
+<li>Spitz</li>
+<li>Emmersdorf</li>
+</ul>
+
+<h3>🐾 Wachau Entdeckerpass</h3>
+<ul>
+<li>Donau entdeckt</li>
+<li>Marillenbaum gefunden</li>
+<li>Fähre benutzt</li>
+<li>Zug gesehen</li>
+<li>Windis fotografiert</li>
+</ul>
+
+<h3>💌 Stammgastbereich</h3>
+<p>Informationen zu Marillenblüte, Advent Wachau, neuen Windis-Büchern und freien Zimmern.</p>
 </section>
 
 </main>

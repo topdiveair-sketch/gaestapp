@@ -31,3 +31,17 @@
 .live-service,.prearrival{background:linear-gradient(135deg,#fffaf2,#f4eadc)}
 .actions .linkbtn,.actions .btn{margin-top:6px}
 @media(min-width:760px){.weathergrid{grid-template-columns:repeat(4,1fr)}}
+
+/* V6.2 Prüfbereich */
+#selfTestResult.ok{border-color:#516b44;background:#edf3e8}
+#selfTestResult.fail{border-color:#9b3a3a;background:#fdecec}
+
+/* V6.3 Touren & Livecheck */
+.tours article p{min-height:72px}
+#livecheck article{border-left:6px solid var(--gold)}
+
+
+/* V7.1 Funktions-Fix */
+#funktioniert-jetzt{border:2px solid rgba(81,107,68,.35);background:linear-gradient(135deg,#fffaf2,#edf3e8)}
+#funktioniert-jetzt h3{margin-top:24px}
+#funktioniert-jetzt .bighelp{min-height:78px}

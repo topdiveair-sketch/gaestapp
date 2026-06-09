@@ -193,6 +193,34 @@ if (reloadWeather) reloadWeather.addEventListener('click', loadWeather);
 loadWeather();
 
 
+
+// V6.2 Browser-Selbsttest
+function runSelfTest(){
+  const checks = [
+    ['Frühstück Express Button', !!document.getElementById('waBreakfastExpress')],
+    ['Wetterbereich', !!document.getElementById('weatherLive')],
+    ['Wanderassistent', document.querySelectorAll('.tourchoice').length >= 5],
+    ['Radassistent', document.querySelectorAll('.bikechoice').length >= 4],
+    ['Notfall/Standort Buttons', !!document.getElementById('waLocationCard')],
+    ['Gepäckformular', !!document.getElementById('luggageForm')],
+    ['Bewertungsbereich', !!document.getElementById('bewertung')],
+    ['Windis-Kinderbereich', !!document.getElementById('kinderbereich')],
+    ['Service Worker Unterstützung', 'serviceWorker' in navigator],
+    ['Fetch Unterstützung für Live-Wetter', 'fetch' in window]
+  ];
+  const failed = checks.filter(c => !c[1]);
+  const box = document.getElementById('selfTestResult');
+  if (!box) return;
+  box.classList.remove('ok','fail');
+  box.classList.add(failed.length ? 'fail' : 'ok');
+  box.textContent = failed.length
+    ? 'Fehler gefunden:\n' + failed.map(f => '• ' + f[0]).join('\n')
+    : 'Alles Wesentliche geladen:\n' + checks.map(c => '✓ ' + c[0]).join('\n');
+}
+
+const selfTestBtn = document.getElementById('runSelfTest');
+if (selfTestBtn) selfTestBtn.addEventListener('click', runSelfTest);
+
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => navigator.serviceWorker.register('./service-worker.js').catch(()=>{}));
 }
@@ -258,13 +286,15 @@ Wichtig: Nicht blind los. Die Wachau schaut lieb aus, hat aber Höhenmeter.`,
 
   day: `⛰️ Welterbesteig-Etappe Aggsbach Markt → Emmersdorf
 
-Empfehlung:
-• offizielle Welterbesteig-Etappe prüfen
-• früh starten
-• Rückfahrt oder Gepäcktransport vorher klären
+Offizielle Eckdaten:
+• ca. 14,74 km
+• ca. 5:00 h
+• Schwierigkeit: mittel
+• ca. 547 hm Aufstieg / 544 hm Abstieg
+• Start: Aggsbach Markt, Marktplatz
+• Ziel: Emmersdorf, Marktstraße
 
-Dauer: Tagesplanung.
-Mitnehmen: Wasser, Regen-/Sonnenschutz, Akku, Jause.
+Vorher prüfen: Wetter, Wasser, Rückweg, Wachaubahn/Bus/Fähren.
 Pias Kommentar: Wer groß geht, soll klug starten.`,
 
   kids: `🎒 Kinderfreundliche Entdeckerrunde
@@ -361,5 +391,34 @@ if (quizBtn) {
     const box = document.getElementById('quizText');
     const item = quiz[Math.floor(Math.random() * quiz.length)];
     if (box) box.textContent = item;
+  });
+}
+
+
+
+// V7.1 robuste Funktions-Fixes
+function setBox(id, text){
+  const el = document.getElementById(id);
+  if (el) el.textContent = text;
+}
+document.querySelectorAll('.js-tour').forEach(btn => {
+  btn.addEventListener('click', () => setBox('fixedTourResult', btn.dataset.result || 'Keine Empfehlung hinterlegt.'));
+});
+document.querySelectorAll('.js-bike').forEach(btn => {
+  btn.addEventListener('click', () => setBox('fixedBikeResult', btn.dataset.result || 'Kein Ziel hinterlegt.'));
+});
+document.querySelectorAll('.js-kid').forEach(btn => {
+  btn.addEventListener('click', () => setBox('fixedKidResult', btn.dataset.result || 'Keine Aufgabe hinterlegt.'));
+});
+const fixedWeatherAdvice = document.getElementById('fixedWeatherAdvice');
+if (fixedWeatherAdvice) {
+  fixedWeatherAdvice.addEventListener('click', () => {
+    setBox('fixedWeatherResult',
+      'Wetter-Regel für Gäste:\n\n' +
+      '☀️ trocken: Welterbesteig oder Donauradweg möglich.\n' +
+      '🌦️ wechselhaft: kleine Runde, Wachaubahn, Spitz oder Melk planen.\n' +
+      '🌧️ Regen: Stift Melk, Kartause Aggsbach, Museum, Heuriger oder Donauschlössel Spitz.\n' +
+      '⛈️ Gewitter: keine Wald-/Höhenwege, zuerst Sicherheit.'
+    );
   });
 }
