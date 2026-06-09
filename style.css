@@ -45,3 +45,20 @@
 #funktioniert-jetzt{border:2px solid rgba(81,107,68,.35);background:linear-gradient(135deg,#fffaf2,#edf3e8)}
 #funktioniert-jetzt h3{margin-top:24px}
 #funktioniert-jetzt .bighelp{min-height:78px}
+
+
+/* V7.2 Mehrsprachigkeit + robuste Buttons */
+.languagebar{
+  position:sticky;top:0;z-index:9999;
+  display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap;
+  background:#fffaf2;border-bottom:1px solid rgba(107,79,42,.18);
+  padding:8px 10px;box-shadow:0 6px 18px rgba(43,33,24,.12)
+}
+.langbtn{
+  border:1px solid rgba(107,79,42,.25);background:#fff;border-radius:999px;
+  padding:7px 10px;font-weight:900;cursor:pointer;color:var(--ink)
+}
+.langbtn.active{background:var(--gold);border-color:var(--brand)}
+#funktioniert-jetzt{border:2px solid rgba(81,107,68,.35);background:linear-gradient(135deg,#fffaf2,#edf3e8)}
+#funktioniert-jetzt .bighelp{min-height:78px}
+.resultbox{white-space:pre-line}

@@ -422,3 +422,258 @@ if (fixedWeatherAdvice) {
     );
   });
 }
+
+
+
+// V7.2 Mehrsprachigkeit und robuste Klickfunktionen
+document.addEventListener('DOMContentLoaded', function(){
+  const translations = {
+    de: {
+      quickTitle:'✅ Funktionierende Schnellassistenten',
+      quickIntro:'Wählt eine Tour, Radtour, Wetterhilfe oder Kinderaktion. Das Ergebnis erscheint sofort darunter.',
+      walkTitle:'🥾 Welche Wanderung passt heute?',
+      chooseWalk:'Bitte eine Wanderart auswählen.',
+      bikeTitle:'🚲 Donauradweg-Assistent',
+      chooseBike:'Bitte ein Radziel auswählen.',
+      weatherHelpTitle:'🌦️ Wetterhilfe',
+      weatherHelpIntro:'Wenn das Live-Wetter nicht lädt: über GitHub Pages öffnen oder den externen Wetterlink nutzen.',
+      weatherAdviceBtn:'🌦️ Wetter-Hinweis anzeigen',
+      weatherExternal:'Externes Wetter öffnen',
+      weatherNoAdvice:'Noch kein Hinweis angezeigt.',
+      kidsTitle:'🐾 Windis-Kinderbereich',
+      chooseKid:'Bitte Quiz, Schatzsuche oder Vorlese-Moment auswählen.',
+      bookingTitle:'🛏️ Zimmer über Booking.com buchen',
+      bookingIntro:'Direkt zum Booking-Angebot von Zuhause am Bach – Wachau Privatzimmer.',
+      bookingBtn:'Jetzt über Booking öffnen',
+      walkShort:'🌿 Kleine Runde ab Zuhause am Bach\n\nDauer: 30–90 Minuten.\nIdeal: nach Anreise, mit Kindern oder bei unsicherem Wetter.\nRoute: Bach – Ort – Donauufer – zurück.\nPia sagt: Kurz heißt nicht langweilig.',
+      walkMedium:'🥾 Halbtagesrunde Richtung Maria Langegg / Jauerling\n\nDauer: ca. 3–4 Stunden je nach Variante.\nIdeal: Wald, Aussicht und Wachau-Gefühl.\nWichtig: Wasser, gutes Schuhwerk, Wetter und Rückweg prüfen.',
+      walkDay:'⛰️ Welterbesteig Aggsbach Markt → Emmersdorf\n\nOffizielle Eckdaten: ca. 14,74 km, ca. 5 Stunden, mittel.\nWichtig: früh starten, Wetter prüfen, Rückfahrt klären.\nFür fitte Wanderer.',
+      walkKids:'🎒 Mit Kindern\n\nEmpfehlung: kurze Entdeckerrunde.\nAufgabe: Donau, Blume, Marillenbaum, Zug und schönen Stein finden.\nZiel: Spaß statt Gewaltmarsch.',
+      walkDog:'🐕 Mit Hund\n\nEmpfehlung: kühl, schattig und nicht zu lang.\nWasser mitnehmen, heißen Asphalt vermeiden, Pausen einplanen.\nPia sagt: Ein Hund braucht keinen Rekord, sondern Wasser.',
+      bikeMelk:'🏛️ Richtung Melk\n\nGut für Stift Melk, Bahnhof Melk und feste Donauquerung.\nEmpfehlung bei unsicherem Fährbetrieb.',
+      bikeSpitz:'🍇 Richtung Spitz\n\nGut für Weinorte, Donaupanorama und Fähre Spitz–Arnsdorf.\nVorher Fährbetrieb prüfen.',
+      bikeDuernstein:'🏰 Richtung Dürnstein\n\nDer Wachau-Klassiker: Altstadt, Ruine, Fotos.\nFrüh starten, weil es dort voll werden kann.',
+      bikeKrems:'🏙️ Richtung Krems\n\nLängere Tour mit Altstadt und Bahnhof.\nWindrichtung und Rücktransport prüfen.',
+      weatherAdvice:'Wetter-Regel für Gäste:\n\n☀️ trocken: Welterbesteig oder Donauradweg möglich.\n🌦️ wechselhaft: kleine Runde, Wachaubahn, Spitz oder Melk planen.\n🌧️ Regen: Stift Melk, Kartause Aggsbach, Museum, Heuriger oder Donauschlössel Spitz.\n⛈️ Gewitter: keine Wald- oder Höhenwege. Sicherheit zuerst.',
+      kidQuiz1:'Quizfrage 1: Was wächst in der Wachau besonders berühmt?\n\nAntwort: Marillen und Wein.',
+      kidQuiz2:'Quizfrage 2: Welcher Fluss fließt durch die Wachau?\n\nAntwort: Die Donau.',
+      kidTreasure:'Schatzsuche:\nFindet heute fünf Dinge: Donau, Zug, Marillenbaum, Blume und Stein in Herzform.',
+      kidStory:'Vorlese-Moment:\nPia will losrennen, Fidel liest zuerst den Fahrplan, Gloria packt Wasser ein. Und genau deshalb kommen am Ende alle gut an.'
+    },
+    en: {
+      quickTitle:'✅ Working quick assistants',
+      quickIntro:'Choose a walk, bike trip, weather tip or kids activity. The result appears immediately below.',
+      walkTitle:'🥾 Which walk fits today?',
+      chooseWalk:'Please choose a walking option.',
+      bikeTitle:'🚲 Danube Cycle Path assistant',
+      chooseBike:'Please choose a cycling destination.',
+      weatherHelpTitle:'🌦️ Weather help',
+      weatherHelpIntro:'If live weather does not load, open the app via GitHub Pages or use the external weather link.',
+      weatherAdviceBtn:'🌦️ Show weather advice',
+      weatherExternal:'Open external weather',
+      weatherNoAdvice:'No advice shown yet.',
+      kidsTitle:'🐾 Windis kids area',
+      chooseKid:'Please choose quiz, treasure hunt or story moment.',
+      bookingTitle:'🛏️ Book the room via Booking.com',
+      bookingIntro:'Directly open the Booking listing of Zuhause am Bach – Wachau private room.',
+      bookingBtn:'Open Booking now',
+      walkShort:'🌿 Short walk from Zuhause am Bach\n\nDuration: 30–90 minutes.\nIdeal after arrival, with children or in uncertain weather.\nRoute: stream – village – Danube bank – back.',
+      walkMedium:'🥾 Half-day walk towards Maria Langegg / Jauerling\n\nDuration: about 3–4 hours depending on route.\nIdeal for forest, views and Wachau feeling.\nCheck water, shoes, weather and return route.',
+      walkDay:'⛰️ World Heritage Trail Aggsbach Markt → Emmersdorf\n\nAbout 14.74 km, around 5 hours, medium difficulty.\nStart early, check weather and return transport.',
+      walkKids:'🎒 With children\n\nRecommendation: short discovery walk.\nTask: find the Danube, a flower, an apricot tree, a train and a beautiful stone.',
+      walkDog:'🐕 With dog\n\nChoose cool, shady and shorter routes.\nBring water, avoid hot asphalt and plan breaks.',
+      bikeMelk:'🏛️ Towards Melk\n\nGood for Melk Abbey, Melk station and a fixed Danube crossing.',
+      bikeSpitz:'🍇 Towards Spitz\n\nGood for wine villages, Danube views and the Spitz–Arnsdorf ferry. Check ferry service first.',
+      bikeDuernstein:'🏰 Towards Dürnstein\n\nThe Wachau classic: old town, castle ruins, photos. Start early.',
+      bikeKrems:'🏙️ Towards Krems\n\nLonger ride with old town and train station. Check wind direction and return transport.',
+      weatherAdvice:'Weather rule:\n\n☀️ dry: trail or Danube Cycle Path possible.\n🌦️ changeable: short walk, Wachau railway, Spitz or Melk.\n🌧️ rain: Melk Abbey, Aggsbach Charterhouse, museum, wine tavern or Donauschlössel Spitz.\n⛈️ thunderstorm: no forest or ridge walks. Safety first.',
+      kidQuiz1:'Quiz 1: What is the Wachau famous for?\n\nAnswer: apricots and wine.',
+      kidQuiz2:'Quiz 2: Which river flows through the Wachau?\n\nAnswer: the Danube.',
+      kidTreasure:'Treasure hunt:\nFind five things: Danube, train, apricot tree, flower and a heart-shaped stone.',
+      kidStory:'Story moment:\nPia wants to run, Fidel reads the timetable first, Gloria packs water. That is why everyone arrives safely.'
+    },
+    cs: {
+      quickTitle:'✅ Rychlí pomocníci',
+      quickIntro:'Vyberte procházku, cyklovýlet, počasí nebo dětskou aktivitu.',
+      walkTitle:'🥾 Jaká túra se hodí dnes?',
+      chooseWalk:'Vyberte typ procházky.',
+      bikeTitle:'🚲 Asistent Dunajské cyklostezky',
+      chooseBike:'Vyberte cíl pro kolo.',
+      weatherHelpTitle:'🌦️ Pomoc s počasím',
+      weatherHelpIntro:'Když se živé počasí nenačte, otevřete aplikaci přes GitHub Pages nebo externí odkaz.',
+      weatherAdviceBtn:'🌦️ Zobrazit doporučení',
+      weatherExternal:'Otevřít počasí',
+      weatherNoAdvice:'Zatím bez doporučení.',
+      kidsTitle:'🐾 Dětská zóna Windis',
+      chooseKid:'Vyberte kvíz, hledání pokladu nebo příběh.',
+      bookingTitle:'🛏️ Rezervovat pokoj přes Booking.com',
+      bookingIntro:'Přímý odkaz na nabídku Zuhause am Bach.',
+      bookingBtn:'Otevřít Booking',
+      walkShort:'🌿 Krátká procházka\n\n30–90 minut. Ideální po příjezdu nebo s dětmi.',
+      walkMedium:'🥾 Půldenní túra\n\nAsi 3–4 hodiny. Les, výhledy a Wachau. Zkontrolujte počasí a návrat.',
+      walkDay:'⛰️ Welterbesteig Aggsbach Markt → Emmersdorf\n\nAsi 14,74 km, 5 hodin, střední obtížnost. Začněte brzy.',
+      walkKids:'🎒 S dětmi\n\nNajděte Dunaj, květinu, meruňkový strom, vlak a hezký kámen.',
+      walkDog:'🐕 Se psem\n\nKrátká, chladná a stinná trasa. Vezměte vodu.',
+      bikeMelk:'🏛️ Směr Melk\n\nKlášter Melk, nádraží a pevný přechod přes Dunaj.',
+      bikeSpitz:'🍇 Směr Spitz\n\nVíno, Dunaj a přívoz Spitz–Arnsdorf. Zkontrolujte provoz.',
+      bikeDuernstein:'🏰 Směr Dürnstein\n\nKlasika Wachau: město, zřícenina, fotografie.',
+      bikeKrems:'🏙️ Směr Krems\n\nDelší trasa, staré město a nádraží.',
+      weatherAdvice:'Počasí:\n\n☀️ sucho: turistika/kolo.\n🌦️ proměnlivo: krátká trasa nebo Wachaubahn.\n🌧️ déšť: Melk, muzeum, heuriger nebo Donauschlössel Spitz.\n⛈️ bouřka: nechoďte do lesa ani na hřeben.',
+      kidQuiz1:'Kvíz: Čím je Wachau známá?\n\nOdpověď: meruňky a víno.',
+      kidQuiz2:'Kvíz: Která řeka protéká Wachau?\n\nOdpověď: Dunaj.',
+      kidTreasure:'Hledání pokladu: Dunaj, vlak, meruňkový strom, květina, kámen ve tvaru srdce.',
+      kidStory:'Příběh: Pia chce běžet, Fidel čte jízdní řád, Gloria bere vodu.'
+    },
+    hu: {
+      quickTitle:'✅ Gyors segítők',
+      quickIntro:'Válasszon túrát, kerékpártúrát, időjárási tanácsot vagy gyerekprogramot.',
+      walkTitle:'🥾 Melyik séta jó ma?',
+      chooseWalk:'Válasszon séta típust.',
+      bikeTitle:'🚲 Duna-kerékpárút segítő',
+      chooseBike:'Válasszon kerékpáros célt.',
+      weatherHelpTitle:'🌦️ Időjárási segítség',
+      weatherAdviceBtn:'🌦️ Tanács mutatása',
+      weatherExternal:'Külső időjárás megnyitása',
+      weatherNoAdvice:'Még nincs tanács.',
+      kidsTitle:'🐾 Windis gyerekrész',
+      chooseKid:'Válasszon kvízt, kincskeresést vagy mesét.',
+      bookingTitle:'🛏️ Szoba foglalása Booking.com-on',
+      bookingIntro:'Közvetlen link a Zuhause am Bach ajánlatához.',
+      bookingBtn:'Booking megnyitása',
+      weatherHelpIntro:'Ha az élő időjárás nem tölt be, nyissa meg GitHub Pages-en vagy külső linken.',
+      walkShort:'🌿 Rövid séta\n\n30–90 perc. Ideális érkezés után vagy gyerekekkel.',
+      walkMedium:'🥾 Félnapos séta\n\nKb. 3–4 óra. Erdő, kilátás, Wachau-hangulat.',
+      walkDay:'⛰️ Aggsbach Markt → Emmersdorf\n\nKb. 14,74 km, 5 óra, közepes. Induljon korán.',
+      walkKids:'🎒 Gyerekekkel\n\nKeressétek meg: Duna, virág, barackfa, vonat, szép kő.',
+      walkDog:'🐕 Kutyával\n\nHűvös, árnyékos, rövidebb út. Vizet vinni.',
+      bikeMelk:'🏛️ Melk felé\n\nApátság, vasútállomás, biztos Duna-átkelés.',
+      bikeSpitz:'🍇 Spitz felé\n\nBorvidék, Duna, komp. Előtte ellenőrizni.',
+      bikeDuernstein:'🏰 Dürnstein felé\n\nWachau klasszikus: óváros, rom, fotók.',
+      bikeKrems:'🏙️ Krems felé\n\nHosszabb túra, óváros, vasútállomás.',
+      weatherAdvice:'Időjárás:\n\n☀️ száraz: túra vagy bringa.\n🌦️ változékony: rövid séta/Wachaubahn.\n🌧️ eső: Melk, múzeum, Heuriger vagy Donauschlössel Spitz.\n⛈️ zivatar: ne menjen erdőbe vagy magaslatra.',
+      kidQuiz1:'Kvíz: Miről híres Wachau?\n\nVálasz: sárgabarack és bor.',
+      kidQuiz2:'Kvíz: Melyik folyó folyik Wachau-n át?\n\nVálasz: a Duna.',
+      kidTreasure:'Kincskeresés: Duna, vonat, barackfa, virág, szív alakú kő.',
+      kidStory:'Mese: Pia futna, Fidel menetrendet olvas, Gloria vizet csomagol.'
+    },
+    es: {
+      quickTitle:'✅ Asistentes rápidos',
+      quickIntro:'Elige caminata, ruta en bici, consejo del tiempo o actividad infantil.',
+      walkTitle:'🥾 ¿Qué caminata va bien hoy?',
+      chooseWalk:'Elige una opción de caminata.',
+      bikeTitle:'🚲 Asistente de la ruta ciclista del Danubio',
+      chooseBike:'Elige un destino en bici.',
+      weatherHelpTitle:'🌦️ Ayuda meteorológica',
+      weatherHelpIntro:'Si el tiempo en vivo no carga, abre la app por GitHub Pages o usa el enlace externo.',
+      weatherAdviceBtn:'🌦️ Mostrar consejo',
+      weatherExternal:'Abrir tiempo externo',
+      weatherNoAdvice:'Aún no hay consejo.',
+      kidsTitle:'🐾 Zona infantil Windis',
+      chooseKid:'Elige quiz, búsqueda del tesoro o cuento.',
+      bookingTitle:'🛏️ Reservar habitación en Booking.com',
+      bookingIntro:'Enlace directo al alojamiento Zuhause am Bach.',
+      bookingBtn:'Abrir Booking',
+      walkShort:'🌿 Paseo corto\n\n30–90 minutos. Ideal tras la llegada, con niños o con tiempo incierto.',
+      walkMedium:'🥾 Media jornada\n\n3–4 horas aprox. Bosque, vistas y ambiente Wachau.',
+      walkDay:'⛰️ Aggsbach Markt → Emmersdorf\n\n14,74 km aprox., 5 horas, dificultad media. Salir temprano.',
+      walkKids:'🎒 Con niños\n\nEncontrad: Danubio, flor, albaricoquero, tren y una piedra bonita.',
+      walkDog:'🐕 Con perro\n\nRuta fresca, con sombra y no demasiado larga. Llevar agua.',
+      bikeMelk:'🏛️ Hacia Melk\n\nAbadía, estación y cruce fijo del Danubio.',
+      bikeSpitz:'🍇 Hacia Spitz\n\nVino, Danubio y ferry Spitz–Arnsdorf. Comprobar antes.',
+      bikeDuernstein:'🏰 Hacia Dürnstein\n\nClásico de Wachau: casco antiguo, ruina y fotos.',
+      bikeKrems:'🏙️ Hacia Krems\n\nRuta más larga, casco antiguo y estación.',
+      weatherAdvice:'Regla del tiempo:\n\n☀️ seco: caminar o bici.\n🌦️ variable: paseo corto o Wachaubahn.\n🌧️ lluvia: Melk, museo, heuriger o Donauschlössel Spitz.\n⛈️ tormenta: evitar bosque y alturas.',
+      kidQuiz1:'Quiz: ¿Por qué es famosa la Wachau?\n\nRespuesta: albaricoques y vino.',
+      kidQuiz2:'Quiz: ¿Qué río pasa por la Wachau?\n\nRespuesta: el Danubio.',
+      kidTreasure:'Búsqueda: Danubio, tren, albaricoquero, flor y piedra con forma de corazón.',
+      kidStory:'Cuento: Pia quiere correr, Fidel lee el horario y Gloria lleva agua.'
+    },
+    fr: {
+      quickTitle:'✅ Assistants rapides',
+      quickIntro:'Choisissez une promenade, une sortie vélo, un conseil météo ou une activité enfants.',
+      walkTitle:'🥾 Quelle promenade convient aujourd’hui ?',
+      chooseWalk:'Veuillez choisir une option de promenade.',
+      bikeTitle:'🚲 Assistant piste cyclable du Danube',
+      chooseBike:'Veuillez choisir une destination à vélo.',
+      weatherHelpTitle:'🌦️ Aide météo',
+      weatherHelpIntro:'Si la météo en direct ne charge pas, ouvrez l’application via GitHub Pages ou le lien externe.',
+      weatherAdviceBtn:'🌦️ Afficher le conseil',
+      weatherExternal:'Ouvrir la météo externe',
+      weatherNoAdvice:'Aucun conseil affiché.',
+      kidsTitle:'🐾 Espace enfants Windis',
+      chooseKid:'Choisissez quiz, chasse au trésor ou histoire.',
+      bookingTitle:'🛏️ Réserver la chambre sur Booking.com',
+      bookingIntro:'Lien direct vers Zuhause am Bach.',
+      bookingBtn:'Ouvrir Booking',
+      walkShort:'🌿 Petite promenade\n\n30–90 minutes. Idéal après l’arrivée, avec enfants ou météo incertaine.',
+      walkMedium:'🥾 Demi-journée\n\nEnviron 3–4 heures. Forêt, vues et ambiance Wachau.',
+      walkDay:'⛰️ Aggsbach Markt → Emmersdorf\n\nEnviron 14,74 km, 5 heures, difficulté moyenne. Partir tôt.',
+      walkKids:'🎒 Avec enfants\n\nTrouvez : Danube, fleur, abricotier, train et jolie pierre.',
+      walkDog:'🐕 Avec chien\n\nParcours frais, ombragé, pas trop long. Emporter de l’eau.',
+      bikeMelk:'🏛️ Vers Melk\n\nAbbaye, gare et traversée fixe du Danube.',
+      bikeSpitz:'🍇 Vers Spitz\n\nVin, Danube et bac Spitz–Arnsdorf. Vérifier avant.',
+      bikeDuernstein:'🏰 Vers Dürnstein\n\nClassique de la Wachau : vieille ville, ruine, photos.',
+      bikeKrems:'🏙️ Vers Krems\n\nTrajet plus long, vieille ville et gare.',
+      weatherAdvice:'Règle météo:\n\n☀️ sec: randonnée ou vélo.\n🌦️ variable: courte promenade ou Wachaubahn.\n🌧️ pluie: Melk, musée, heuriger ou Donauschlössel Spitz.\n⛈️ orage: éviter forêt et hauteurs.',
+      kidQuiz1:'Quiz : pourquoi la Wachau est-elle célèbre ?\n\nRéponse : abricots et vin.',
+      kidQuiz2:'Quiz : quel fleuve traverse la Wachau ?\n\nRéponse : le Danube.',
+      kidTreasure:'Chasse : Danube, train, abricotier, fleur et pierre en forme de cœur.',
+      kidStory:'Histoire : Pia veut courir, Fidel lit l’horaire, Gloria prend de l’eau.'
+    }
+  };
+
+  let currentLang = localStorage.getItem('zab_lang') || 'de';
+
+  function t(key){
+    return (translations[currentLang] && translations[currentLang][key]) || translations.de[key] || key;
+  }
+
+  function applyLanguage(lang){
+    currentLang = lang;
+    localStorage.setItem('zab_lang', lang);
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      el.textContent = t(key);
+    });
+    document.querySelectorAll('.langbtn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+    document.documentElement.lang = lang === 'cs' ? 'cs' : lang;
+  }
+
+  document.querySelectorAll('.langbtn').forEach(btn => {
+    btn.addEventListener('click', () => applyLanguage(btn.dataset.lang));
+  });
+
+  function setResult(id, text){
+    const el = document.getElementById(id);
+    if (el) el.textContent = text;
+  }
+
+  document.body.addEventListener('click', function(ev){
+    const tour = ev.target.closest('.js-tour');
+    if (tour) {
+      setResult('fixedTourResult', t(tour.dataset.resultKey));
+      return;
+    }
+    const bike = ev.target.closest('.js-bike');
+    if (bike) {
+      setResult('fixedBikeResult', t(bike.dataset.resultKey));
+      return;
+    }
+    const kid = ev.target.closest('.js-kid');
+    if (kid) {
+      setResult('fixedKidResult', t(kid.dataset.resultKey));
+      return;
+    }
+    if (ev.target.closest('#fixedWeatherAdvice')) {
+      setResult('fixedWeatherResult', t('weatherAdvice'));
+      return;
+    }
+  });
+
+  applyLanguage(currentLang);
+
+  // Funktionstest in der Konsole
+  console.log('Zuhause am Bach V7.2 geladen: Sprache + Schnellassistenten aktiv.');
+});

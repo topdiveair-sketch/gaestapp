@@ -10,6 +10,17 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
+<div id="languageBar" class="languagebar" aria-label="Sprache wählen">
+  <b>🌐 Sprache:</b>
+  <button class="langbtn active" type="button" data-lang="de">DE</button>
+  <button class="langbtn" type="button" data-lang="en">EN</button>
+  <button class="langbtn" type="button" data-lang="cs">CZ</button>
+  <button class="langbtn" type="button" data-lang="hu">HU</button>
+  <button class="langbtn" type="button" data-lang="es">ES</button>
+  <button class="langbtn" type="button" data-lang="fr">FR</button>
+</div>
+
   <header class="hero hero-poster-wrap">
     <img class="hero-poster" src="hero-windis.png" alt="Willkommen bei Zuhause am Bach Wachau mit Fidel, Gloria und Pia" />
   </header>
@@ -50,46 +61,48 @@
 
 
     
+
 <section id="funktioniert-jetzt" class="card">
-  <h2>✅ Funktionierende Schnellassistenten</h2>
-  <p>Hier sind die wichtigsten Funktionen nochmals als robuste Version eingebaut: Tour wählen, Radtour wählen, Wetterhinweis anzeigen und Windis-Kinderbereich starten.</p>
+  <h2 data-i18n="quickTitle">✅ Funktionierende Schnellassistenten</h2>
+  <p data-i18n="quickIntro">Wählt eine Tour, Radtour, Wetterhilfe oder Kinderaktion. Das Ergebnis erscheint sofort darunter.</p>
 
-  <h3>🥾 Welche Wanderung passt heute?</h3>
+  <h3 data-i18n="walkTitle">🥾 Welche Wanderung passt heute?</h3>
   <div class="assistant-options">
-    <button class="bighelp js-tour" data-result="🌿 Kleine Runde ab Zuhause am Bach&#10;&#10;Dauer: 30–90 Minuten.&#10;Ideal: nach Anreise, mit Kindern, bei unsicherem Wetter.&#10;Route: Bach – Ort – Donauufer – zurück.&#10;Tipp von Pia: Nicht weit ist manchmal genau richtig.">🌿 1–2 Stunden</button>
-    <button class="bighelp js-tour" data-result="🥾 Halbtagesrunde / Maria-Langegg-Richtung&#10;&#10;Dauer: ca. 3–4 Stunden je nach Variante.&#10;Ideal: Wald, Aussicht, Wachau-Gefühl.&#10;Wichtig: Wasser, gutes Schuhwerk, Rückweg prüfen.">🥾 3–4 Stunden</button>
-    <button class="bighelp js-tour" data-result="⛰️ Welterbesteig Aggsbach Markt → Emmersdorf&#10;&#10;Offizielle Eckdaten: ca. 14,74 km, ca. 5 Stunden, mittel.&#10;Wichtig: früh starten, Wetter prüfen, Rückfahrt klären.">⛰️ Ganztag</button>
-    <button class="bighelp js-tour" data-result="🎒 Mit Kindern&#10;&#10;Empfehlung: kurze Entdeckerrunde.&#10;Aufgabe: Donau, Blume, Marillenbaum, Zug und schönen Stein finden.&#10;Ziel: Spaß statt Gewaltmarsch.">🎒 Mit Kindern</button>
-    <button class="bighelp js-tour" data-result="🐕 Mit Hund&#10;&#10;Empfehlung: kühl, schattig, kurz.&#10;Wasser mitnehmen, heißen Asphalt vermeiden, Pausen einplanen.&#10;Pia sagt: Ein Hund braucht keinen Rekord, sondern Wasser.">🐕 Mit Hund</button>
+    <button class="bighelp js-tour" type="button" data-result-key="walkShort">🌿 1–2 Stunden</button>
+    <button class="bighelp js-tour" type="button" data-result-key="walkMedium">🥾 3–4 Stunden</button>
+    <button class="bighelp js-tour" type="button" data-result-key="walkDay">⛰️ Ganztag</button>
+    <button class="bighelp js-tour" type="button" data-result-key="walkKids">🎒 Mit Kindern</button>
+    <button class="bighelp js-tour" type="button" data-result-key="walkDog">🐕 Mit Hund</button>
   </div>
-  <div id="fixedTourResult" class="resultbox">Bitte eine Wanderart auswählen.</div>
+  <div id="fixedTourResult" class="resultbox" data-i18n="chooseWalk">Bitte eine Wanderart auswählen.</div>
 
-  <h3>🚲 Donauradweg-Assistent</h3>
+  <h3 data-i18n="bikeTitle">🚲 Donauradweg-Assistent</h3>
   <div class="assistant-options">
-    <button class="bighelp js-bike" data-result="🏛️ Richtung Melk&#10;&#10;Gut für Stift Melk, Bahnhof Melk und feste Donauquerung.&#10;Empfehlung bei unsicherem Fährbetrieb.">Melk</button>
-    <button class="bighelp js-bike" data-result="🍇 Richtung Spitz&#10;&#10;Gut für Weinorte, Donaupanorama und Fähre Spitz–Arnsdorf.&#10;Vorher Fährbetrieb prüfen.">Spitz</button>
-    <button class="bighelp js-bike" data-result="🏰 Richtung Dürnstein&#10;&#10;Der Wachau-Klassiker: Altstadt, Ruine, Fotos.&#10;Früh starten, weil es dort voll werden kann.">Dürnstein</button>
-    <button class="bighelp js-bike" data-result="🏙️ Richtung Krems&#10;&#10;Längere Tour mit Altstadt und Bahnhof.&#10;Windrichtung und Rücktransport prüfen.">Krems</button>
+    <button class="bighelp js-bike" type="button" data-result-key="bikeMelk">🏛️ Melk</button>
+    <button class="bighelp js-bike" type="button" data-result-key="bikeSpitz">🍇 Spitz</button>
+    <button class="bighelp js-bike" type="button" data-result-key="bikeDuernstein">🏰 Dürnstein</button>
+    <button class="bighelp js-bike" type="button" data-result-key="bikeKrems">🏙️ Krems</button>
   </div>
-  <div id="fixedBikeResult" class="resultbox">Bitte ein Radziel auswählen.</div>
+  <div id="fixedBikeResult" class="resultbox" data-i18n="chooseBike">Bitte ein Radziel auswählen.</div>
 
-  <h3>🌦️ Wetterhilfe</h3>
-  <p>Falls das Live-Wetter nicht lädt, liegt es meist an fehlendem Internet, Browser-Sperre oder lokal geöffneter Datei. Dann bitte über HTTPS/GitHub Pages öffnen.</p>
+  <h3 data-i18n="weatherHelpTitle">🌦️ Wetterhilfe</h3>
+  <p data-i18n="weatherHelpIntro">Wenn das Live-Wetter nicht lädt: über GitHub Pages öffnen oder den externen Wetterlink nutzen.</p>
   <div class="actions">
-    <button id="fixedWeatherAdvice" class="btn primary" type="button">🌦️ Wetter-Hinweis anzeigen</button>
-    <a class="linkbtn" target="_blank" rel="noopener" href="https://www.wetter.com/oesterreich/aggsbach-markt/ATAT10497001.html">Externes Wetter öffnen</a>
+    <button id="fixedWeatherAdvice" class="btn primary" type="button" data-i18n="weatherAdviceBtn">🌦️ Wetter-Hinweis anzeigen</button>
+    <a class="linkbtn" target="_blank" rel="noopener" href="https://www.wetter.com/oesterreich/aggsbach-markt/ATAT10497001.html" data-i18n="weatherExternal">Externes Wetter öffnen</a>
   </div>
-  <div id="fixedWeatherResult" class="resultbox">Noch kein Hinweis angezeigt.</div>
+  <div id="fixedWeatherResult" class="resultbox" data-i18n="weatherNoAdvice">Noch kein Hinweis angezeigt.</div>
 
-  <h3>🐾 Windis-Kinderbereich – richtig nutzbar</h3>
+  <h3 data-i18n="kidsTitle">🐾 Windis-Kinderbereich</h3>
   <div class="assistant-options">
-    <button class="bighelp js-kid" data-result="Quizfrage 1: Was wächst in der Wachau besonders berühmt?&#10;&#10;Antwort: Marillen und Wein.">🐾 Quiz 1</button>
-    <button class="bighelp js-kid" data-result="Quizfrage 2: Welcher Fluss fließt durch die Wachau?&#10;&#10;Antwort: Die Donau.">🐾 Quiz 2</button>
-    <button class="bighelp js-kid" data-result="Schatzsuche: Findet heute fünf Dinge: Donau, Zug, Marillenbaum, Blume und Stein in Herzform.">🔎 Schatzsuche</button>
-    <button class="bighelp js-kid" data-result="Vorlese-Moment: Pia will losrennen, Fidel liest zuerst den Fahrplan, Gloria packt Wasser ein. Und genau deshalb kommen am Ende alle gut an.">📚 Vorlese-Moment</button>
+    <button class="bighelp js-kid" type="button" data-result-key="kidQuiz1">🐾 Quiz 1</button>
+    <button class="bighelp js-kid" type="button" data-result-key="kidQuiz2">🐾 Quiz 2</button>
+    <button class="bighelp js-kid" type="button" data-result-key="kidTreasure">🔎 Schatzsuche</button>
+    <button class="bighelp js-kid" type="button" data-result-key="kidStory">📚 Vorlese-Moment</button>
   </div>
-  <div id="fixedKidResult" class="resultbox">Bitte Quiz, Schatzsuche oder Vorlese-Moment auswählen.</div>
+  <div id="fixedKidResult" class="resultbox" data-i18n="chooseKid">Bitte Quiz, Schatzsuche oder Vorlese-Moment auswählen.</div>
 </section>
+
 
 <section id="v6start" class="card v6hero">
       <p class="kicker">Version 6.0</p>
@@ -254,7 +267,14 @@
     </section>
 
 
-    <section id="vor-anreise" class="card prearrival">
+    
+<section id="booking-direkt" class="card">
+  <h2 data-i18n="bookingTitle">🛏️ Zimmer über Booking.com buchen</h2>
+  <p data-i18n="bookingIntro">Direkt zum Booking-Angebot von Zuhause am Bach – Wachau Privatzimmer.</p>
+  <a class="linkbtn primary" target="_blank" rel="noopener" href="https://www.booking.com/hotel/at/zu-hause-am-bach.de.html" data-i18n="bookingBtn">Jetzt über Booking öffnen</a>
+</section>
+
+<section id="vor-anreise" class="card prearrival">
       <h2>🧳 Vor der Anreise</h2>
       <p>Damit vor Ort nichts holpert: Gäste können die wichtigsten Dinge schon vor der Ankunft erledigen.</p>
       <div class="routegrid">
