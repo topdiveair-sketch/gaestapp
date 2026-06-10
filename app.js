@@ -321,7 +321,7 @@ Wichtig: Bei Hitze lieber Abendrunde statt Tagesmarsch.
 Pia sagt: Ein Hund braucht keinen Rekord. Er braucht Wasser.`
 };
 
-document.querySelectorAll('.tourchoice')document.querySelectorAll('.tourchoice').forEach(btn => {
+document.querySelectorAll('.tourchoice').forEach(btn => {
   btn.addEventListener('click', () => {
     const box = document.getElementById('tourResult');
     if (box) box.textContent = tourTexts[btn.dataset.tour] || 'Keine Empfehlung gefunden.';
@@ -372,7 +372,7 @@ Vorher prüfen: Kondition, Windrichtung, Bahn/Bus.
 Tipp: Bei Gegenwind wird aus Romantik schnell Arbeit.`
 };
 
-document.querySelectorAll('.bikechoice')document.querySelectorAll('.bikechoice').forEach(btn => {
+document.querySelectorAll('.bikechoice').forEach(btn => {
   btn.addEventListener('click', () => {
     const box = document.getElementById('bikeResult');
     if (box) box.textContent = bikeTexts[btn.dataset.bike] || 'Kein Ziel gefunden.';
@@ -677,3 +677,23 @@ document.addEventListener('DOMContentLoaded', function(){
   // Funktionstest in der Konsole
   console.log('Zuhause am Bach V7.2 geladen: Sprache + Schnellassistenten aktiv.');
 });
+
+
+
+// V7.3 Cache-Hilfe
+const clearAppCache = document.getElementById('clearAppCache');
+if (clearAppCache) {
+  clearAppCache.addEventListener('click', async () => {
+    try {
+      if ('serviceWorker' in navigator) {
+        const regs = await navigator.serviceWorker.getRegistrations();
+        for (const reg of regs) await reg.unregister();
+      }
+      if ('caches' in window) {
+        const names = await caches.keys();
+        for (const name of names) await caches.delete(name);
+      }
+    } catch(e) {}
+    location.reload(true);
+  });
+}
