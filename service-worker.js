@@ -1,6 +1,1 @@
-const CACHE_NAME = 'zuhause-am-bach-v7-3-cache';
-const CACHE = 'zuhause-am-bach-v4-1-1';
-const ASSETS = ['./','./index.html','./style.css','./app.js','./manifest.webmanifest','./icon.svg'];
-self.addEventListener('install', e => e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS))));
-self.addEventListener('activate', e => e.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k))))));
-self.addEventListener('fetch', e => e.waitUntil ? e.respondWith(caches.match(e.request).then(r => r || fetch(e.request))) : null);
+const CACHE_NAME='zab-v10';self.addEventListener('install',e=>self.skipWaiting());
