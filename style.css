@@ -32,3 +32,9 @@
 .routebtn.active,.tomorrow-route.active{background:var(--gold);border-color:var(--brand)}
 #bedienhilfe{border:2px solid rgba(81,107,68,.30)}
 #funktionstest{border:2px dashed rgba(107,79,42,.35)}
+
+
+/* V10.4 geprüfte Buttons */
+.routebtn.active,.tomorrow-route.active,.breakfast.active,.breakfast-time.active{background:var(--gold);border-color:var(--brand)}
+.quizanswers button.correct{background:#edf3e8;border-color:#516b44}
+.quizanswers button.wrong{background:#fdecec;border-color:#9b3a3a}

@@ -233,3 +233,247 @@ document.addEventListener('DOMContentLoaded',()=>{
     });
   });
 })();
+
+
+
+// V10.4 finaler Button-Funktionstest und robuste Bedienlogik
+(function(){
+  const WA_FINAL = "436646437526";
+
+  const ROUTES_FINAL = {
+    short: {
+      text: "🌿 Spaziergang entlang Donau und Bach\n\n30–90 Minuten. Ideal nach der Anreise, mit Kindern oder bei unsicherem Wetter.",
+      map: "https://www.google.com/maps/search/Donauufer+Aggsbach+Markt",
+      official: "https://www.google.com/maps/search/Donauufer+Aggsbach+Markt",
+      iframe: "https://www.openstreetmap.org/export/embed.html?bbox=15.3898%2C48.2898%2C15.4022%2C48.2975&layer=mapnik&marker=48.29368%2C15.396018"
+    },
+    medium: {
+      text: "🥾 Halbtageswanderung Richtung Maria Langegg / Jauerling\n\n3–4 Stunden. Wald, Aussicht, Wachau-Gefühl. Wetter und Rückweg prüfen.",
+      map: "https://www.google.com/maps/dir/Aggsbach+Markt+82+3641+Aggsbach+Markt/Maria+Langegg",
+      official: "https://www.google.com/maps/dir/Aggsbach+Markt+82+3641+Aggsbach+Markt/Maria+Langegg",
+      iframe: "https://www.openstreetmap.org/export/embed.html?bbox=15.34%2C48.27%2C15.43%2C48.33&layer=mapnik&marker=48.29368%2C15.396018"
+    },
+    emmersdorf: {
+      text: "⛰️ Welterbesteig Aggsbach Markt → Emmersdorf\n\nCa. 14,74 km, ca. 5 Stunden, mittel. Früh starten und Rückfahrt klären.",
+      map: "https://www.google.com/maps/dir/Aggsbach+Markt+82+3641+Aggsbach+Markt/Emmersdorf+an+der+Donau",
+      official: "https://www.donau.com/touren/welterbesteig-wachau-07-aggsbach-markt-emmersdorf-naturpark-jauerling-wachau",
+      iframe: "https://www.openstreetmap.org/export/embed.html?bbox=15.30%2C48.22%2C15.43%2C48.31&layer=mapnik&marker=48.29368%2C15.396018"
+    },
+    maria: {
+      text: "🥾 Welterbesteig Maria Laach → Aggsbach Markt\n\nCa. 7 km. Gute Anreisetappe Richtung Zuhause am Bach.",
+      map: "https://www.google.com/maps/dir/Maria+Laach+am+Jauerling/Aggsbach+Markt+82+3641+Aggsbach+Markt",
+      official: "https://www.donau.com/touren/welterbesteig-wachau-06-maria-laach-aggsbach-markt-naturpark-jauerling-wachau",
+      iframe: "https://www.openstreetmap.org/export/embed.html?bbox=15.31%2C48.285%2C15.43%2C48.335&layer=mapnik&marker=48.29368%2C15.396018"
+    },
+    kids: {
+      text: "🎒 Kinder-Entdeckerrunde\n\nFindet Donau, Blume, Marillenbaum, Zug und Stein in Herzform. Ziel: Spaß statt Gewaltmarsch.",
+      map: "https://www.google.com/maps/search/Donauufer+Aggsbach+Markt",
+      official: "https://www.google.com/maps/search/Donauufer+Aggsbach+Markt",
+      iframe: "https://www.openstreetmap.org/export/embed.html?bbox=15.3898%2C48.2898%2C15.4022%2C48.2975&layer=mapnik&marker=48.29368%2C15.396018"
+    },
+    dog: {
+      text: "🐕 Hundefreundliche Runde\n\nKurz, schattig, mit Wasserpausen. Heißen Asphalt vermeiden.",
+      map: "https://www.google.com/maps/search/Donauufer+Aggsbach+Markt",
+      official: "https://www.google.com/maps/search/Donauufer+Aggsbach+Markt",
+      iframe: "https://www.openstreetmap.org/export/embed.html?bbox=15.3898%2C48.2898%2C15.4022%2C48.2975&layer=mapnik&marker=48.29368%2C15.396018"
+    },
+    rain: {
+      text: "🌧️ Schlechtwetterprogramm\n\nStift Melk, Kartause Aggsbach, Museum, Heuriger oder Donauschlössel Spitz.",
+      map: "https://www.google.com/maps/search/Stift+Melk+Kartause+Aggsbach+Donauschlössel+Spitz",
+      official: "https://www.google.com/maps/search/Stift+Melk+Kartause+Aggsbach+Donauschlössel+Spitz",
+      iframe: "https://www.openstreetmap.org/export/embed.html?bbox=15.27%2C48.17%2C15.55%2C48.38&layer=mapnik&marker=48.29368%2C15.396018"
+    }
+  };
+
+  const QUIZ_FINAL = [
+    {q:"Wer ist der große ruhige Galgo der Wilden Wachauer Windis?", a:["Fidel","Gloria","Pia"], correct:0},
+    {q:"Wer ist die elegante braun geströmte Galga?", a:["Pia","Gloria","Fidel"], correct:1},
+    {q:"Wer ist das kleine Whippet-Mädchen mit rotem Halstuch?", a:["Pia","Gloria","Fidel"], correct:0},
+    {q:"Wo liegt Zuhause am Bach?", a:["Aggsbach Markt","Aggsbach Dorf","Dürnstein"], correct:0},
+    {q:"Welcher Fluss prägt die Wachau?", a:["Donau","Inn","Mur"], correct:0},
+    {q:"Wofür ist die Wachau besonders bekannt?", a:["Marillen und Wein","Kokosnüsse","Nordsee"], correct:0},
+    {q:"Was sollten Wanderer vor dem Start prüfen?", a:["Wetter, Wasser, Rückweg","Nur die Schuhfarbe","Fernsehsender"], correct:0},
+    {q:"Welche Bahn fährt durch die Wachau?", a:["Wachaubahn","U-Bahn Berlin","Matterhornbahn"], correct:0},
+    {q:"Was ist für Hunde im Sommer wichtig?", a:["Wasser und Schatten","Heißer Asphalt","Keine Pausen"], correct:0},
+    {q:"Was suchen Kinder bei der Windis-Schatzsuche?", a:["Donau, Zug, Marillenbaum und Herzstein","Eisbären","Raketen"], correct:0}
+  ];
+
+  let quizIndexFinal = 0;
+  let quizScoreFinal = 0;
+  let quizAnsweredFinal = 0;
+
+  function el(id){ return document.getElementById(id); }
+  function waFinal(text){ window.location.href = "https://api.whatsapp.com/send?phone=" + WA_FINAL + "&text=" + encodeURIComponent(text); }
+  function activeFinal(selector, btn){ document.querySelectorAll(selector).forEach(b => b.classList.remove("active")); if(btn) btn.classList.add("active"); }
+
+  function routeUpdateFinal(prefix, key){
+    const r = ROUTES_FINAL[key] || ROUTES_FINAL.short;
+    const result = el(prefix + "Result");
+    const map = el(prefix + "MapLink");
+    const official = el(prefix + "OfficialLink");
+    const frame = el(prefix + "Map");
+    if(result) result.textContent = r.text;
+    if(map) map.href = r.map;
+    if(official) official.href = r.official;
+    if(frame) frame.src = r.iframe;
+  }
+
+  function weatherFinal(statusId, gridId, days, index){
+    const status = el(statusId), grid = el(gridId);
+    if(!status || !grid) return;
+    status.textContent = "Wetter wird geladen …";
+    const url = "https://api.open-meteo.com/v1/forecast?latitude=48.2937&longitude=15.3960&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,wind_speed_10m_max&timezone=Europe%2FVienna&forecast_days=" + days;
+    fetch(url).then(r => r.json()).then(d => {
+      const x = d.daily || {};
+      grid.innerHTML =
+        '<div class="weatheritem"><b>Temperatur</b><span>' + (x.temperature_2m_min?.[index] ?? "–") + ' / ' + (x.temperature_2m_max?.[index] ?? "–") + ' °C</span></div>' +
+        '<div class="weatheritem"><b>Regen</b><span>' + (x.precipitation_sum?.[index] ?? "–") + ' mm</span></div>' +
+        '<div class="weatheritem"><b>Wind</b><span>' + (x.wind_speed_10m_max?.[index] ?? "–") + ' km/h</span></div>';
+      status.textContent = "Wetter geladen.";
+    }).catch(() => { status.textContent = "Wetter konnte nicht geladen werden."; });
+  }
+
+  function quizShowFinal(){
+    const box = el("quizBox"), answers = el("quizAnswers"), score = el("quizScore");
+    if(!box || !answers) return;
+    const item = QUIZ_FINAL[quizIndexFinal];
+    box.textContent = "Frage " + (quizIndexFinal + 1) + " von " + QUIZ_FINAL.length + ":\n" + item.q;
+    answers.innerHTML = "";
+    answers.dataset.done = "0";
+    item.a.forEach((txt, i) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.textContent = txt;
+      b.addEventListener("click", () => {
+        if(answers.dataset.done === "1") return;
+        answers.dataset.done = "1";
+        quizAnsweredFinal++;
+        if(i === item.correct){
+          quizScoreFinal++;
+          b.classList.add("correct");
+          box.textContent += "\n\n✅ Richtig!";
+        } else {
+          b.classList.add("wrong");
+          box.textContent += "\n\n❌ Nicht ganz. Richtige Antwort: " + item.a[item.correct];
+        }
+        if(score) score.textContent = "Punkte: " + quizScoreFinal + " / " + quizAnsweredFinal;
+      });
+      answers.appendChild(b);
+    });
+  }
+
+  function treasureFinal(){
+    const items = document.querySelectorAll(".treasureItem");
+    const result = el("treasureResult");
+    const checked = Array.from(items).filter(i => i.checked).length;
+    if(result) result.textContent = checked + " / " + items.length + " Entdeckungen gefunden." + (checked === items.length && items.length ? "\n🏅 Gratulation! Ihr seid Wachau-Entdecker!" : "");
+  }
+
+  function appTestFinal(){
+    const checks = [
+      ["Heute-Dashboard", !!el("heute")],
+      ["Morgen-Assistent", !!el("morgen")],
+      ["Touren-Assistent", !!el("touren")],
+      ["Route Ergebnis", !!el("routeResult")],
+      ["Route Karte", !!el("routeMap")],
+      ["Route Kartenlink", !!el("routeMapLink")],
+      ["Route Gepäck", !!el("routeLuggage")],
+      ["Wetter heute", !!el("weatherStatus")],
+      ["Wetter morgen", !!el("tomorrowWeatherStatus")],
+      ["Frühstück WhatsApp", !!el("breakfastWhatsApp")],
+      ["Gepäck WhatsApp", !!el("luggageWhatsApp")],
+      ["Quiz", !!el("quizStart") && !!el("quizBox") && !!el("quizAnswers")],
+      ["Schatzsuche", document.querySelectorAll(".treasureItem").length > 0],
+      ["Standort senden", !!el("sendLocation")],
+      ["Sprache", document.querySelectorAll(".langbtn").length >= 2]
+    ];
+    const failed = checks.filter(c => !c[1]);
+    const box = el("appTestResult");
+    if(box) box.textContent = failed.length ? "⚠️ Fehler:\n" + failed.map(f => "• " + f[0]).join("\n") : "✅ Alle wichtigen Funktionen gefunden.\n" + checks.map(c => "✓ " + c[0]).join("\n");
+  }
+
+  async function cacheClearFinal(){
+    try{
+      if("serviceWorker" in navigator){
+        const regs = await navigator.serviceWorker.getRegistrations();
+        for(const reg of regs) await reg.unregister();
+      }
+      if("caches" in window){
+        const names = await caches.keys();
+        for(const name of names) await caches.delete(name);
+      }
+    }catch(e){}
+    location.reload();
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // Route buttons
+    document.querySelectorAll(".routebtn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        activeFinal(".routebtn", btn);
+        routeUpdateFinal("route", btn.dataset.route || "short");
+      });
+    });
+    document.querySelectorAll(".tomorrow-route").forEach(btn => {
+      btn.addEventListener("click", () => {
+        activeFinal(".tomorrow-route", btn);
+        routeUpdateFinal("tomorrowRoute", btn.dataset.route || "short");
+      });
+    });
+    routeUpdateFinal("route", "short");
+    routeUpdateFinal("tomorrowRoute", "short");
+
+    // Breakfast choices
+    document.querySelectorAll(".breakfast").forEach(btn => btn.addEventListener("click", () => activeFinal(".breakfast", btn)));
+    document.querySelectorAll(".breakfast-time").forEach(btn => btn.addEventListener("click", () => activeFinal(".breakfast-time", btn)));
+
+    const breakfast = el("breakfastWhatsApp");
+    if(breakfast) breakfast.addEventListener("click", () => {
+      const art = document.querySelector(".breakfast.active")?.dataset.value || "Standard-Frühstück";
+      const zeit = document.querySelector(".breakfast-time.active")?.dataset.value || "08:00 Uhr";
+      waFinal("Hallo Hans und Laura,\n\nwir möchten für morgen Frühstück bestellen.\n\nArt: " + art + "\nZeit: " + zeit + "\nPersonen: ____\nWünsche: ____\n\nLiebe Grüße");
+    });
+
+    const luggage = el("luggageWhatsApp");
+    if(luggage) luggage.addEventListener("click", () => waFinal("Hallo Hans und Laura,\n\nwir möchten Gepäcktransport anfragen.\n\nAbholort:\nZiel:\nZeit:\nGepäckstücke:\n\nLiebe Grüße"));
+
+    const routeLuggage = el("routeLuggage");
+    if(routeLuggage) routeLuggage.addEventListener("click", () => waFinal("Hallo Hans und Laura,\n\nwir möchten Gepäcktransport zur gewählten Tour anfragen.\n\nLiebe Grüße"));
+
+    // Weather
+    const rw = el("reloadWeather");
+    if(rw) rw.addEventListener("click", () => weatherFinal("weatherStatus","weatherGrid",1,0));
+    const rtw = el("reloadTomorrowWeather");
+    if(rtw) rtw.addEventListener("click", () => weatherFinal("tomorrowWeatherStatus","tomorrowWeatherGrid",2,1));
+    weatherFinal("weatherStatus","weatherGrid",1,0);
+    weatherFinal("tomorrowWeatherStatus","tomorrowWeatherGrid",2,1);
+
+    // Quiz
+    const qs = el("quizStart");
+    if(qs) qs.addEventListener("click", () => { quizIndexFinal=0; quizScoreFinal=0; quizAnsweredFinal=0; const score=el("quizScore"); if(score) score.textContent="Punkte: 0 / 0"; quizShowFinal(); });
+    const qn = el("quizNext");
+    if(qn) qn.addEventListener("click", () => { quizIndexFinal = (quizIndexFinal + 1) % QUIZ_FINAL.length; quizShowFinal(); });
+
+    // Treasure
+    document.querySelectorAll(".treasureItem").forEach(i => i.addEventListener("change", treasureFinal));
+    const tresReset = el("treasureReset");
+    if(tresReset) tresReset.addEventListener("click", () => { document.querySelectorAll(".treasureItem").forEach(i => i.checked=false); treasureFinal(); });
+    treasureFinal();
+
+    // Location
+    const sendLoc = el("sendLocation");
+    if(sendLoc) sendLoc.addEventListener("click", () => {
+      if(!navigator.geolocation) return waFinal("Hallo Hans, bitte um Hilfe. Standort wird manuell gesendet.");
+      navigator.geolocation.getCurrentPosition(
+        p => waFinal("Hallo Hans,\n\nhier ist mein Standort:\nhttps://www.google.com/maps/search/?api=1&query=" + p.coords.latitude + "," + p.coords.longitude),
+        () => waFinal("Hallo Hans, bitte um Hilfe. Standort wird manuell gesendet.")
+      );
+    });
+
+    // Utility buttons
+    const test = el("runAppTest");
+    if(test) test.addEventListener("click", appTestFinal);
+    const clear = el("clearAppCache");
+    if(clear) clear.addEventListener("click", cacheClearFinal);
+  });
+})();
