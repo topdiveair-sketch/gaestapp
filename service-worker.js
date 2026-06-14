@@ -1,33 +1,40 @@
-Zuhause am Bach Erlebnis-App V5.7
+const CACHE_NAME = 'zab-v14-2-rad-morgen-fix';
+const APP_SHELL = [
+  './',
+  './index.html',
+  './style.css',
+  './app.js',
+  './manifest.webmanifest',
+  './icon.svg',
+  './hero-windis.png',
+  './assets/donauschloessel-aussen.jpg',
+  './assets/donauschloessel-innen.jpg'
+];
 
-Start:
-1. ZIP entpacken.
-2. index.html öffnen.
+self.addEventListener('install', event => {
+  event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(APP_SHELL)).then(() => self.skipWaiting()));
+});
 
-Wichtig zu WhatsApp-Standort:
-- Die WhatsApp-Buttons öffnen WhatsApp an Hans: +43 664 6437526.
-- GPS-Standort funktioniert im Browser nur zuverlässig, wenn die App über eine sichere Webseite (https://...) geöffnet wird.
-- Beim direkten Öffnen der index.html vom Handy/PC kann der Browser den Standort blockieren.
-- Dann öffnet WhatsApp trotzdem mit einer Vorlage: Gast soll Standort in WhatsApp manuell teilen oder den Ort/Wegweiser eintragen.
+self.addEventListener('activate', event => {
+  event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))).then(() => self.clients.claim()));
+});
 
-Empfohlene Veröffentlichung:
-https://www.zuhauseambach.at/gaesteapp/
+self.addEventListener('fetch', event => {
+  const request = event.request;
+  if (request.method !== 'GET') return;
 
+  const url = new URL(request.url);
+  if (url.origin !== self.location.origin) {
+    // Externe Dienste wie Wetter, Google Maps, Booking nicht in den App-Cache zwingen.
+    // Das verhindert alte/falsche Fremdantworten und macht Fehler leichter nachvollziehbar.
+    return;
+  }
 
-------------------------------------------------------------
-VERSION 6.0 - ERWEITERUNGEN
-------------------------------------------------------------
-Neu eingebaut:
-- Google-/Booking-Bewertungsbereich
-- Frühstück Express per WhatsApp
-- Wanderassistent nach Dauer / Kinder / Hund
-- Donauradweg-Assistent für Melk, Spitz, Dürnstein, Krems
-- Fähren-Ampel mit Prüflink
-- Windis-Kinderbereich mit Quiz, Schatzsuche und Ausmalidee
-- neue Schnellkacheln und Bottom-Navigation
-
-Wichtig:
-Der Google-Bewertungsbutton nutzt derzeit eine Google-Suche nach
-"Zuhause am Bach Aggsbach Markt 82 Bewertung".
-Sobald der exakte Google-Business-Bewertungslink vorhanden ist,
-kann dieser Link direkt ersetzt werden.
+  event.respondWith(
+    fetch(request).then(response => {
+      const copy = response.clone();
+      caches.open(CACHE_NAME).then(cache => cache.put(request, copy)).catch(() => {});
+      return response;
+    }).catch(() => caches.match(request).then(cached => cached || caches.match('./index.html')))
+  );
+});
