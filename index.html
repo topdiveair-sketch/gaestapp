@@ -2,61 +2,441 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#2f5d50">
-<link rel="manifest" href="./manifest.webmanifest">
-<link rel="icon" href="./icon.svg" type="image/svg+xml">
-<title>Zuhause am Bach Mobile</title>
-<style>
-:root{--bg:#f6f2ea;--card:#fffaf1;--ink:#1f2b25;--muted:#66736b;--green:#2f5d50;--gold:#d89b34;--red:#b64735;--blue:#456c93;--line:#e3d8c5;--shadow:0 8px 24px rgba(0,0,0,.12)}
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
-header{position:sticky;top:0;z-index:10;background:linear-gradient(135deg,#2f5d50,#173d34);color:white;padding:18px 16px 14px;box-shadow:var(--shadow)}
-h1{font-size:24px;margin:0 0 6px;font-weight:900}.small{font-size:13px;opacity:.9}main{padding:14px;max-width:760px;margin:0 auto 82px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.btn,.bigbtn{border:0;border-radius:20px;padding:18px 12px;font-size:20px;font-weight:900;background:var(--card);box-shadow:var(--shadow);color:var(--ink);min-height:82px}
-.bigbtn{width:100%;margin:8px 0;text-align:left}.btn:active,.bigbtn:active{transform:scale(.98)}.green{background:#dff1e9}.gold{background:#fff0ce}.red{background:#ffe1db}.blue{background:#e2edf8}
-.card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:14px;margin:12px 0;box-shadow:var(--shadow)}.card h2{margin:0 0 10px;font-size:22px}
-.row{display:flex;gap:10px;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding:12px 0}.row:first-of-type{border-top:0}
-.pill{display:inline-block;border-radius:999px;padding:6px 10px;font-size:13px;font-weight:900;background:#eee}.room{font-weight:900;color:var(--green)}
-input,select,textarea{width:100%;font-size:18px;padding:14px;border-radius:14px;border:1px solid var(--line);background:white;margin:6px 0 10px}
-label{font-weight:900;font-size:14px;color:var(--muted)}.hidden{display:none}.nav{position:fixed;bottom:0;left:0;right:0;background:white;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);z-index:20}
-.nav button{border:0;background:white;padding:10px 4px;font-size:13px;font-weight:900;color:var(--ink)}.total{font-size:30px;font-weight:900;color:var(--green)}.itembtn{font-size:18px;min-height:68px;padding:12px}.danger{background:#ffe1db;color:#8a2416}.ok{background:#dff1e9;color:#174737}.notice{font-size:14px;background:#eef6f2;border:1px solid #cfe2da;border-radius:14px;padding:10px;margin-top:10px}@media (min-width:700px){.grid{grid-template-columns:repeat(4,1fr)}}
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>Zuhause am Bach – Gäste-App V49 Smart-WLAN</title>
+<link rel="stylesheet" href="style.css?v=49">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-<header><h1>🏡 Zuhause am Bach Mobile</h1><div class="small">4 Zimmer • Gäste speichern • Extras zur Rechnung buchen</div></header>
+<header class="hero" id="start">
+  <div class="topbar">
+    <div class="badge">V49 · Smart-WLAN & Wetter</div>
+  </div>
+  <img class="hero-img" src="hero-windis.png" alt="Zuhause am Bach Wachau mit den Wilden Wachauer Windis">
+</header>
+
+<nav class="quick-nav">
+  <button onclick="go('hausinfo')">🏡 Hausinfo</button>
+  <button onclick="go('smartwifi')">📶 WLAN</button>
+  <button onclick="go('notfall')">☎ Notfall</button>
+  <button onclick="go('direktbuchung')">📅 Buchen</button>
+  <button onclick="go('wetter')">🌤 Heute</button>
+  <button onclick="go('regen')">🌧 Regen</button>
+  <button onclick="go('wandern')">🥾 Wandern</button>
+  <button onclick="go('rad')">🚴 Radfahren</button>
+  <button onclick="go('essen')">🍽 Essen</button>
+  <button onclick="go('kinder')">🐾 Kinderwelt</button>
+</nav>
+
 <main>
-<section id="home"><div class="grid"><button class="btn green" onclick="show('bookings')">🛏 Buchungen</button><button class="btn blue" onclick="show('guests')">👥 Gäste</button><button class="btn gold" onclick="show('extras')">🍺 Extras</button><button class="btn green" onclick="show('invoice')">💶 Rechnung</button></div><div class="notice" id="installHint">Online über GitHub Pages öffnen. In Chrome sollte dann „App installieren“ erscheinen.</div><div class="card"><h2>Heute / Schnellzugriff</h2><div id="todayList"></div></div><div class="card"><h2>Zimmer</h2><div id="roomStatus"></div></div></section>
-<section id="bookings" class="hidden"><button class="bigbtn green" onclick="newBooking()">➕ Neue Buchung</button><div class="card"><h2>Buchungen</h2><div id="bookingList"></div></div></section>
-<section id="guests" class="hidden"><button class="bigbtn green" onclick="newGuest()">➕ Neuen Gast hinzufügen</button><div class="card"><h2>Gespeicherte Gäste</h2><input id="guestSearch" placeholder="Gast suchen..." oninput="renderGuests()"><div id="guestList"></div></div></section>
-<section id="editGuest" class="hidden"><div class="card"><h2 id="guestFormTitle">Gast</h2><input type="hidden" id="guestId"><label>Name</label><input id="guestName"><label>Telefon</label><input id="guestPhone"><label>E-Mail</label><input id="guestEmail"><label>Notizen</label><textarea id="guestNotes" rows="3"></textarea><button class="bigbtn green" onclick="saveGuest()">💾 Gast speichern</button><button class="bigbtn" onclick="show('guests')">Zurück</button></div></section>
-<section id="editBooking" class="hidden"><div class="card"><h2 id="bookingFormTitle">Buchung</h2><input type="hidden" id="bookingId"><label>Gast</label><select id="bookingGuest"></select><button class="bigbtn blue" onclick="newGuestFromBooking()">➕ Gast neu hinzufügen</button><label>Zimmer</label><select id="bookingRoom"></select><label>Anreise</label><input id="bookingArrival" type="date"><label>Abreise</label><input id="bookingDeparture" type="date"><label>Personen</label><input id="bookingPersons" type="number" min="1" value="2"><label>Zimmerpreis pro Nacht</label><input id="bookingPrice" type="number" step="0.01" value="89"><label>Frühstück</label><select id="bookingBreakfast"><option value="kein">kein</option><option value="normal">normal</option><option value="vegetarisch">vegetarisch</option><option value="vegan">vegan</option></select><button class="bigbtn green" onclick="saveBooking()">💾 Buchung speichern</button><button class="bigbtn danger" onclick="deleteBooking()">🗑 Buchung löschen</button><button class="bigbtn" onclick="show('bookings')">Zurück</button></div></section>
-<section id="extras" class="hidden"><div class="card"><h2>Gast / Buchung auswählen</h2><select id="activeBooking" onchange="setActiveBooking(this.value)"></select></div><div class="card"><h2>Getränke</h2><div class="grid" id="drinkButtons"></div></div><div class="card"><h2>Speisen</h2><div class="grid" id="foodButtons"></div></div><div class="card"><h2>Freie Position</h2><label>Text</label><input id="customText" placeholder="z.B. Marillenkuchen"><label>Betrag €</label><input id="customPrice" type="number" step="0.01" placeholder="0.00"><button class="bigbtn green" onclick="addCustom()">➕ Zur Rechnung</button></div></section>
-<section id="invoice" class="hidden"><div class="card"><h2>Rechnung / Extras</h2><select id="invoiceBooking" onchange="setActiveBooking(this.value)"></select><div id="invoiceDetails"></div><button class="bigbtn blue" onclick="copyInvoice()">📋 Rechnungstext kopieren</button><button class="bigbtn gold" onclick="exportJson()">⬇ Export JSON</button><button class="bigbtn danger" onclick="clearExtras()">🧹 Extras löschen</button></div></section>
+<section class="card welcome">
+  <h1>Willkommen Zuhause am Bach</h1>
+  <p class="lead">Das Basislager für Welterbesteig und Donauradweg.</p>
+  <p>Schön, dass Sie da sind. Jeder Gast bringt seine Geschichte mit. Bei Zuhause am Bach nimmt jeder eine neue Geschichte mit nach Hause.</p>
+  <div class="windis-strip">
+    <article><strong>🐾 Fidel</strong><span>erklärt Wandern und Wege.</span></article>
+    <article><strong>🐾 Gloria</strong><span>gibt Genuss- und Ordnungstipps.</span></article>
+    <article><strong>🐾 Pia</strong><span>kennt kleine Geheimnisse und Abenteuer.</span></article>
+  </div>
+  <div class="button-row">
+    <button onclick="go('hausinfo')">🏡 Anreise & Hausinfo</button>
+    <button onclick="go('wetter')">🌤 Heute aktuell</button>
+    <button onclick="go('regen')">🌧 Regentag</button>
+  </div>
+</section>
+
+<section id="hausinfo" class="card info-card">
+  <div class="kicker">🏡 Anreise, Check-in & Hausinfo</div>
+  <h2>Alles Wichtige für Ankommen und Aufenthalt</h2>
+  <blockquote>Gloria sagt: Wer Schlüssel, Fahrrad, Frühstück und Rückweg geklärt hat, kann den Urlaub wirklich beginnen.</blockquote>
+  <div class="info-grid">
+    <article><h3>📍 Adresse</h3><p>Zuhause am Bach, Aggsbach Markt 82, 3641 Aggsbach Markt.</p></article>
+    <article><h3>🕒 Check-in</h3><p>Bitte die genaue Ankunftszeit vor der Anreise per WhatsApp oder SMS abstimmen.</p></article>
+    <article><h3>🚪 Schlüssel</h3><p>Die Schlüsselübergabe erfolgt nach persönlicher Absprache mit den Gastgebern.</p></article>
+    <article><h3>☀ Check-out</h3><p>Check-out bitte am Abreisetag rechtzeitig mit den Gastgebern abstimmen.</p></article>
+    <article><h3>🚗 Parken</h3><p>Parkmöglichkeit bitte vor Ort beziehungsweise vor Anreise kurz bestätigen lassen.</p></article>
+    <article><h3>🌙 Späte Anreise</h3><p>Bei später Anreise bitte frühzeitig Bescheid geben, damit die Übergabe gut klappt.</p></article>
+  </div>
+  <div class="button-row">
+    <a class="btn-link" href="https://www.google.com/maps/dir/?api=1&destination=Aggsbach+Markt+82,+3641+Aggsbach+Markt" target="_blank" rel="noopener">🗺 Route öffnen</a>
+    <a class="btn-link brown" href="https://wa.me/436646437526" target="_blank" rel="noopener">💬 WhatsApp</a>
+    <a class="btn-link" href="sms:+436646437526?body=Hallo%20Zuhause%20am%20Bach,%20wir%20reisen%20heute%20an%20und%20möchten%20die%20Ankunftszeit%20abstimmen.">📲 Anreise per SMS abstimmen</a>
+  </div>
+
+  <div class="info-grid house-grid">
+    <article><h3>🥐 Frühstück</h3><p>Frühstück bitte rechtzeitig anfragen. Details und Zeiten werden direkt abgestimmt.</p></article>
+    <article><h3>🚲 Fahrradgarage</h3><p>Fahrräder können nach Absprache sicher untergestellt werden.</p></article>
+    <article><h3>🔋 E-Bike laden</h3><p>Ladegerät bitte mitbringen und Ladeplatz vor Ort abstimmen.</p></article>
+    <article><h3>🗑 Müll</h3><p>Bitte Müll trennen und bei Fragen kurz bei den Gastgebern melden.</p></article>
+    <article><h3>🌙 Ruhezeiten</h3><p>Bitte abends und nachts Rücksicht auf andere Gäste und Nachbarn nehmen.</p></article>
+    <article><h3>📶 WLAN-Hilfe</h3><p>Netzwerk: Zuhause am Bach. Offenes Gäste-WLAN, kein Passwort erforderlich.</p></article>
+  </div>
+</section>
+
+<section id="smartwifi" class="card smartwifi-card">
+  <div class="kicker">📶 Smart-WLAN</div>
+  <h2>Willkommen im kostenlosen Gäste-WLAN</h2>
+  <div class="wifi-status-box" id="wifiStatusBox">
+    <div class="wifi-icon">📶</div>
+    <div>
+      <strong id="wifiStatusTitle">Verbindung wird geprüft …</strong>
+      <p id="wifiStatusText">Bitte kurz warten.</p>
+    </div>
+  </div>
+  <div class="wifi-network">
+    <span>Netzwerk</span>
+    <strong>Zuhause am Bach</strong>
+    <small>Offenes Gäste-WLAN · kein Passwort erforderlich</small>
+  </div>
+  <div class="button-row">
+    <button onclick="confirmWifiGuest()">✅ Ich bin im WLAN</button>
+    <button onclick="copyWifiName()">📋 WLAN-Name kopieren</button>
+    <a class="btn-link" href="#notfall">💬 Gastgeber kontaktieren</a>
+  </div>
+  <div class="tip-grid">
+    <article><h3>🌤 Wetter</h3><p>14-Tage-Prognose für Aggsbach Markt.</p></article>
+    <article><h3>🥾 Wandern</h3><p>Fidels Nordufer-Tipps für den Welterbesteig.</p></article>
+    <article><h3>🚴 Radfahren</h3><p>Glorias Tipps für Donauradweg und E-Bike.</p></article>
+    <article><h3>🍳 Frühstück</h3><p>Frühstück direkt per SMS anfragen.</p></article>
+  </div>
+  <p class="small">Hinweis: Aus Datenschutzgründen kann ein Browser den genauen WLAN-Namen meistens nicht auslesen. Die App zeigt daher den Online-Status und eine freiwillige WLAN-Bestätigung an.</p>
+</section>
+
+<section id="notfall" class="card emergency-card">
+  <div class="kicker">☎ Notfall & wichtige Nummern</div>
+  <h2>Schnelle Hilfe</h2>
+  <div class="emergency-grid">
+    <a href="tel:112"><strong>112</strong><span>Euro-Notruf</span></a>
+    <a href="tel:144"><strong>144</strong><span>Rettung</span></a>
+    <a href="tel:122"><strong>122</strong><span>Feuerwehr</span></a>
+    <a href="tel:133"><strong>133</strong><span>Polizei</span></a>
+    <a href="tel:141"><strong>141</strong><span>Ärztenotdienst</span></a>
+    <a href="tel:1450"><strong>1450</strong><span>Gesundheitsberatung</span></a>
+  </div>
+  <div class="link-grid">
+    <a href="tel:+436646437526">🏡 Gastgeber anrufen</a>
+    <a href="https://wa.me/436646437526" target="_blank" rel="noopener">💬 Gastgeber per WhatsApp</a>
+    <a href="https://www.google.com/search?q=Apotheke+Notdienst+Aggsbach+Markt+Melk+Krems" target="_blank" rel="noopener">💊 Apotheke / Notdienst suchen</a>
+    <a href="https://www.google.com/search?q=Arzt+Notdienst+Aggsbach+Markt+Melk+Krems" target="_blank" rel="noopener">🩺 Arzt / Bereitschaft suchen</a>
+    <a href="https://www.google.com/search?q=Taxi+Aggsbach+Markt+Wachau" target="_blank" rel="noopener">🚕 Taxi suchen</a>
+    <a href="https://www.google.com/search?q=Pannenhilfe+Wachau+Aggsbach+Markt" target="_blank" rel="noopener">🧰 Pannenhilfe suchen</a>
+  </div>
+  <p class="small">Bei akuter Gefahr immer zuerst den Notruf wählen. Offizielle Notrufnummern: <a href="https://www.oesterreich.gv.at/de/themen/notfaelle_unfaelle_und_kriminalitaet/notrufnummern" target="_blank" rel="noopener">oesterreich.gv.at</a>.</p>
+</section>
+
+<section id="service" class="card">
+  <div class="kicker">☎ Mobilität & Hilfe</div>
+  <h2>Service für Gäste</h2>
+  <div class="link-grid">
+    <a href="sms:+436646437526?body=Hallo%20Zuhause%20am%20Bach,%20ich%20möchte%20Frühstück%20anfragen.">🥐 Frühstück anfragen</a>
+    <a href="sms:+436646437526?body=Hallo%20Zuhause%20am%20Bach,%20ich%20möchte%20eine%20Abendjause%20anfragen.">🥨 Abendjause anfragen</a>
+    <a href="sms:+436646437526?body=Hallo%20Zuhause%20am%20Bach,%20ich%20möchte%20Gepäcktransport%20anfragen.">🎒 Gepäcktransport anfragen</a>
+    <a href="https://wa.me/436646437526" target="_blank" rel="noopener">💬 WhatsApp-Hilfe</a>
+    <a href="https://www.google.com/search?q=F%C3%A4hre+Wachau+Spitz+Arnsdorf+Fahrzeiten" target="_blank" rel="noopener">⛴ Fähren prüfen</a>
+    <a href="https://www.google.com/search?q=Wachaubahn+Fahrplan" target="_blank" rel="noopener">🚂 Wachaubahn prüfen</a>
+  </div>
+</section>
+
+<section id="direktbuchung" class="card booking-card">
+  <div class="kicker">📅 Direkt buchen</div>
+  <h2>Jetzt Zimmer bei Booking.com buchen</h2>
+  <p>Hier sehen Sie aktuelle Verfügbarkeit und können Ihr Zimmer bei Zuhause am Bach – Wachau direkt reservieren.</p>
+  <div class="booking-benefits">
+    <span>✅ Sofortige Bestätigung</span>
+    <span>🚴 Ideal für Donauradweg & Welterbesteig</span>
+    <span>🍳 Frühstück zubuchbar</span>
+    <span>🚲 Fahrradgarage & E-Bike-Laden</span>
+  </div>
+  <a class="booking-button" href="https://www.booking.com/searchresults.de.html?highlighted_hotels=10657485&city=-1973598&source=hotel&keep_landing=1" target="_blank" rel="noopener">📅 Jetzt direkt bei Booking.com buchen</a>
+</section>
+
+<section id="zimmer" class="card">
+  <div class="kicker">🛏️ Unsere Zimmer</div>
+  <h2>Unsere Zimmer</h2>
+  <div class="room-grid">
+    <article><h3>🏡 Marillenzimmer</h3><p>Gemütlich und wachautypisch.</p></article>
+    <article><h3>🍇 Weinbergzimmer</h3><p>Für Genussgäste und Ruhesuchende.</p></article>
+    <article><h3>🌊 Donauzimmer</h3><p>Ideal für Wanderer und Radfahrer.</p></article>
+    <article><h3>🌿 Bachblick-Zimmer</h3><p>Bei Zuhause am Bach bei den Wilden Wachauer Windis.</p></article>
+  </div>
+</section>
+
+<section id="wetter" class="card weather-card">
+  <div class="kicker">🌤️ Heute in der Wachau</div>
+  <h2>Heute aktuell</h2>
+  <p>Ein schneller Blick auf Wetter, Heurige, Veranstaltungen, Sonnenuntergang, Donau und Badestellen.</p>
+  <blockquote>Pia sagt: Heute ist immer ein kleines Abenteuer. Man muss nur wissen, wo man hinschaut.</blockquote>
+  <div class="today-grid">
+    <article><h3>🌤 Wetter</h3><p id="todayWeatherSummary">Wetter wird geladen …</p></article>
+    <article><h3>🍷 Heute geöffnet?</h3><p>Heurige und Genussplätze bitte tagesaktuell prüfen.</p><div class="actions"><a href="#heurigen">Heurigen prüfen</a></div></article>
+    <article><h3>🎭 Veranstaltungen</h3><p>Was heute in der Wachau los ist.</p><div class="actions"><a href="https://www.google.com/search?q=Veranstaltungen+heute+Wachau" target="_blank" rel="noopener">Heute suchen</a></div></article>
+    <article><h3>🌅 Sonnenuntergang</h3><p id="todaySunset">Sonnenuntergang wird geladen …</p></article>
+    <article><h3>🌊 Donaupegel</h3><p>Vor Touren am Wasser bitte aktuell prüfen.</p><div class="actions"><a href="https://www.google.com/search?q=Donaupegel+Wachau+heute" target="_blank" rel="noopener">Pegel prüfen</a></div></article>
+    <article><h3>🏊 Badestellen</h3><p>Nur bei sicheren Bedingungen und erlaubten Stellen baden.</p><div class="actions"><a href="https://www.google.com/search?q=Badestellen+Wachau+Aggsbach+Markt" target="_blank" rel="noopener">Badestellen suchen</a></div></article>
+  </div>
+  <h3>14-Tage-Wetter für Aggsbach Markt</h3>
+  <p id="weatherUpdated" class="small">Wetter wird geladen …</p>
+  <div id="weatherBox" class="weather-grid">
+    <article><h3>🌤 Heute</h3><p>Wetter wird geladen …</p></article>
+    <article><h3>🌦 Morgen</h3><p>Wetter wird geladen …</p></article>
+  </div>
+  <div class="chart-wrap">
+    <canvas id="weatherChart" height="230"></canvas>
+  </div>
+  <div id="weatherAdvice" class="result"></div>
+  <p class="small">Quelle: Open-Meteo. Prognosen ab Tag 7 sind als Trend zu verstehen.</p>
+</section>
+
+<section id="morgen" class="card">
+  <div class="kicker">🌤 Morgen-Assistent</div>
+  <h2>Was passt heute?</h2>
+  <div class="button-row">
+    <button onclick="showMorning('wander')">🥾 Wandertag</button>
+    <button onclick="showMorning('bike')">🚴 Radtag</button>
+    <button onclick="showMorning('rain')">🌧 Regentag</button>
+    <button onclick="showMorning('family')">🐾 Familie & Hund</button>
+  </div>
+  <div id="morningResult" class="result"></div>
+</section>
+
+<section id="regen" class="card rain-card">
+  <div class="kicker">🌧 Schlechtwetter & Regentag</div>
+  <h2>Gute Ideen, wenn das Wetter nicht mitspielt</h2>
+  <div class="tip-grid">
+    <article><h3>⛪ Stift Melk</h3><p>Klassiker für Kultur, Architektur und einen trockenen Ausflugstag.</p><div class="actions"><a href="https://www.google.com/search?q=Stift+Melk+Öffnungszeiten" target="_blank" rel="noopener">Öffnungszeiten prüfen</a></div></article>
+    <article><h3>🏺 Venus von Willendorf</h3><p>Kurzer Kulturstopp nahe am Nordufer, gut kombinierbar mit einer kleinen Runde.</p><div class="actions"><a href="https://www.google.com/search?q=Venus+von+Willendorf+Museum+Öffnungszeiten" target="_blank" rel="noopener">Prüfen</a></div></article>
+    <article><h3>☕ Kaffee & Jause</h3><p>Gemütlich bleiben, Wetterfenster abwarten und danach kurz an die Donau.</p><div class="actions"><a href="https://www.google.com/search?q=Cafe+Aggsbach+Markt+Wachau" target="_blank" rel="noopener">In der Nähe suchen</a></div></article>
+    <article><h3>📚 Windis-Zeit</h3><p>Quiz, Geschichten oder Bücherwelt mit Pia, Fidel und Gloria.</p><div class="actions"><a href="#kinder">Kinderwelt öffnen</a><a href="#buecherwelt">Bücherwelt</a></div></article>
+  </div>
+  <p class="small">Tipp: Bei Regenpausen die Wetterkarte im Bereich „Heute“ prüfen und Touren lieber kürzer planen.</p>
+</section>
+
+<section id="wandern" class="card">
+  <div class="kicker">🥾 Fidels Wanderwelt</div>
+  <h2>Geprüfte Nordufer-Routen</h2>
+  <p>Fidel empfiehlt Wege nach Tagesform, Wetter und Begleitung: Gehzeit, Höhenmeter, Trinkwasser und Einkehr gleich mitdenken.</p>
+  <blockquote>Fidel sagt: Lieber eine gute Runde mit Aussicht als eine zu lange Tour ohne Pause.</blockquote>
+  <div class="form-grid">
+    <label>Dauer
+      <select id="wanderDauer">
+        <option value="kurz">1–2 Stunden</option>
+        <option value="mittel" selected>3–4 Stunden</option>
+        <option value="lang">Ganztag</option>
+      </select>
+    </label>
+    <label>Schwierigkeit
+      <select id="wanderSchwer">
+        <option value="leicht">Leicht</option>
+        <option value="mittel" selected>Mittel</option>
+        <option value="sportlich">Sportlich</option>
+      </select>
+    </label>
+    <label>Begleitung
+      <select id="wanderBegleitung">
+        <option value="normal">Normal</option>
+        <option value="hund" selected>Mit Hund</option>
+        <option value="kind">Mit Kindern</option>
+      </select>
+    </label>
+  </div>
+  <div class="button-row">
+    <button onclick="showFidelRoute()">Fidels Empfehlung anzeigen</button>
+    <button onclick="showAllRoutes()">Alle Wander-Routen</button>
+  </div>
+  <div id="wanderResult" class="result"></div>
+</section>
+
+<section id="rad" class="card">
+  <div class="kicker">🚴 Glorias Rad- & Genusswelt</div>
+  <h2>Radfahren, Genuss und Service</h2>
+  <blockquote>Gloria sagt: Erst Akku, Wasser und Rückweg klären, dann schmeckt die Pause doppelt gut.</blockquote>
+  <div class="button-row">
+    <button onclick="showGloria('rad')">🚴 Radfahren</button>
+    <button onclick="showGloria('genuss')">🍷 Genuss</button>
+    <button onclick="showGloria('terrasse')">🌿 Genuss-Terrasse</button>
+    <button onclick="showGloria('service')">🧰 Rad-Service</button>
+  </div>
+  <div id="gloriaResult" class="result"></div>
+</section>
+
+<section id="essen" class="card food-card">
+  <div class="kicker">🍽 Unsere persönlichen Empfehlungen</div>
+  <h2>Essen, Trinken und Einkehren</h2>
+  <p>Keine anonyme Restaurantliste: lieber wenige Tipps, die zur Tour passen. Öffnungszeiten und Reservierung bitte immer aktuell prüfen.</p>
+  <div class="food-grid">
+    <article>
+      <h3>🌿 Glorias Genuss-Terrasse</h3>
+      <p>Direkt bei Zuhause am Bach, nach Verfügbarkeit und Absprache.</p>
+      <div class="facts"><span>Preis: €€</span><span>Gehzeit: 0 min</span><span>Hunde: nach Absprache</span></div>
+      <div class="actions"><a href="sms:+436646437526?body=Hallo%20Zuhause%20am%20Bach,%20wir%20interessieren%20uns%20für%20Glorias%20Genuss-Terrasse.">Anfragen</a></div>
+    </article>
+    <article>
+      <h3>🍷 Donauschlössel / Gritsch</h3>
+      <p>Schöner Rastplatz in Spitz, gut für Radfahrer und Wanderer.</p>
+      <div class="facts"><span>Preis: €€</span><span>Route nach Spitz</span><span>Hunde: bitte fragen</span></div>
+      <div class="actions"><a href="https://www.google.com/search?q=Donauschlössel+Gritsch+Spitz+Reservierung+Öffnungszeiten" target="_blank" rel="noopener">Reservierung prüfen</a><a href="https://www.google.com/maps/dir/?api=1&origin=Aggsbach+Markt+82,+3641+Aggsbach+Markt&destination=Donauschl%C3%B6ssel+Gritsch+Spitz+an+der+Donau&travelmode=bicycling" target="_blank" rel="noopener">Route</a></div>
+    </article>
+    <article>
+      <h3>🐟 Steckerlfisch Graf</h3>
+      <p>Gäste-Tipp Richtung Emmersdorf, besonders als Genuss-Stopp.</p>
+      <div class="facts"><span>Preis: €€</span><span>mit Rad/Auto</span><span>Hunde: bitte fragen</span></div>
+      <div class="actions"><a href="https://www.google.com/search?q=Steckerlfisch+Graf+Emmersdorf+Öffnungszeiten" target="_blank" rel="noopener">Öffnungszeiten</a></div>
+    </article>
+    <article>
+      <h3>🍷 Heurige am Nordufer</h3>
+      <p>Für heute oder morgen am besten tagesaktuell prüfen.</p>
+      <div class="facts"><span>Preis: €–€€</span><span>Spitz / Schwallenbach / Willendorf</span><span>Hunde: je Betrieb</span></div>
+      <div class="actions"><a href="#heurigen">Heurigenfinder öffnen</a></div>
+    </article>
+  </div>
+</section>
+
+<section id="heurigen" class="card">
+  <div class="kicker">🍷 Heurigen heute, morgen oder am Wunschtag</div>
+  <h2>Google-KI-Modus</h2>
+  <p>Nordufer-Auswahl im Umkreis von ca. 15 km ab Zuhause am Bach. Erst Google-KI prüfen, dann bestätigten offenen Heurigen auswählen und Route öffnen.</p>
+  <div class="button-row">
+    <button onclick="setHeurigenDate('today')">Heute</button>
+    <button onclick="setHeurigenDate('tomorrow')">Morgen</button>
+    <input type="date" id="heurigenDate" onchange="renderHeurigen()">
+  </div>
+  <div id="heurigenResult" class="result"></div>
+</section>
+
+<section id="tipps" class="card tips-card">
+  <div class="kicker">🍷 Genuss & Wachau-Tipps</div>
+  <h2>Ausflüge, Kultur und Genuss kompakt</h2>
+  <div class="tip-grid">
+    <article><h3>🍷 Donauschlössel / Gritsch</h3><p>Schöner Rastplatz in Spitz für Wanderer und Radfahrer. Öffnungszeiten bitte aktuell prüfen.</p><div class="actions"><a href="https://www.google.com/maps/dir/?api=1&origin=Aggsbach+Markt+82,+3641+Aggsbach+Markt&destination=Donauschl%C3%B6ssel+Gritsch+Spitz+an+der+Donau&travelmode=bicycling" target="_blank" rel="noopener">Route</a><a href="https://www.google.com/search?q=Donauschl%C3%B6ssel+Gritsch+Spitz+%C3%96ffnungszeiten" target="_blank" rel="noopener">Öffnungszeiten</a></div></article>
+    <article><h3>🏰 Burgruine Aggstein</h3><p>Starker Wachau-Klassiker am Südufer mit Ausblick. Fähre/Anfahrt vorher prüfen.</p><div class="actions"><a href="https://www.google.com/maps/dir/?api=1&origin=Aggsbach+Markt+82,+3641+Aggsbach+Markt&destination=Burgruine+Aggstein&travelmode=driving" target="_blank" rel="noopener">Route</a></div></article>
+    <article><h3>🏺 Venus von Willendorf</h3><p>Kulturstopp nahe am Nordufer, gut für eine kurze Runde oder einen Regentag.</p><div class="actions"><a href="https://www.google.com/maps/dir/?api=1&origin=Aggsbach+Markt+82,+3641+Aggsbach+Markt&destination=Willendorf+in+der+Wachau&travelmode=walking" target="_blank" rel="noopener">Route</a></div></article>
+    <article><h3>🐟 Steckerlfisch Graf</h3><p>Gäste-Tipp für Radfahrer und Wanderer Richtung Emmersdorf. Öffnungszeiten prüfen.</p><div class="actions"><a href="https://www.google.com/search?q=Steckerlfisch+Graf+Emmersdorf+Öffnungszeiten" target="_blank" rel="noopener">Prüfen</a></div></article>
+  </div>
+</section>
+
+<section id="kinder" class="card">
+  <div class="kicker">🐾 Pias Kinderwelt</div>
+  <h2>Pias Kinderwelt</h2>
+  <p>Quiz, Schatzsuche, Geschichten und kleine Wachau-Abenteuer mit Pia.</p>
+  <div class="pia-submenu" aria-label="Pias Untermenü">
+    <button data-pia-mode="quiz" onclick="showPia('quiz')">🏆 Quiz</button>
+    <button data-pia-mode="suche" onclick="showPia('suche')">🔍 Schatzsuche</button>
+    <button data-pia-mode="story" onclick="showPia('story')">📖 Geschichten</button>
+    <button data-pia-mode="abenteuer" onclick="showPia('abenteuer')">🌿 Wachau-Abenteuer</button>
+  </div>
+  <div id="piaResult" class="result"></div>
+  <div class="button-row pia-certificate-row">
+    <button onclick="showCertificate()">🏆 Urkunde</button>
+  </div>
+</section>
+
+<section id="challenge" class="card challenge-card">
+  <div class="kicker">🐾 Windis-Stempel</div>
+  <h2>Digitale Stempel für kleine und große Wachau-Erlebnisse</h2>
+  <p>Sammeln Sie Windis-Stempel an Orten, die für Welterbesteig-Wanderer, Donauradweg-Radfahrer, Kinder und Genussgäste erreichbar sind. Kinder lieben das Sammeln, Erwachsene behalten ihre Wachau-Geschichte im Blick.</p>
+  <div class="challenge-progress-wrap">
+    <div class="challenge-headline"><strong id="challengeStatus">Noch kein Stempel</strong><span id="challengePoints">0 / 100 Punkte</span></div>
+    <div class="progress"><div id="challengeBar" class="progress-bar"></div></div>
+  </div>
+  <div id="challengeGrid" class="challenge-grid"></div>
+  <div class="button-row">
+    <button onclick="resetChallenge()">↺ Stempel zurücksetzen</button>
+    <button onclick="showWachauCertificate()">🏆 Windis-Urkunde</button>
+  </div>
+  <p class="small">Hinweis: Die Stempel sind ein freiwilliges Gäste-Erlebnis. Fotos und Namen werden nur mit Zustimmung veröffentlicht.</p>
+</section>
+
+<section id="gaestebuch" class="card guestbook-card">
+  <div class="kicker">✍ Gästebuch</div>
+  <h2>Welche Geschichte nehmen Sie mit nach Hause?</h2>
+  <p>Ein Satz genügt. Die Geschichte bleibt zunächst nur auf diesem Gerät gespeichert und kann freiwillig an die Gastgeber gesendet werden.</p>
+  <label>Ihre Wachau-Geschichte
+    <textarea id="guestStory" rows="4" placeholder="Heute nehme ich diese Geschichte mit nach Hause …"></textarea>
+  </label>
+  <div class="button-row">
+    <button onclick="addGuestStory()">Geschichte merken</button>
+    <button onclick="shareGuestStory()">An Gastgeber senden</button>
+  </div>
+  <div id="guestbookList" class="guestbook-list"></div>
+</section>
+
+<section id="windis" class="card">
+  <div class="kicker">📚 Die Wilden Wachauer Windis</div>
+  <h2>Fidel, Gloria und Pia</h2>
+  <p>Die Windis begleiten Gäste durch Wachau-Abenteuer, Kinderwelt, Bücher und kleine Entdeckungen.</p>
+  <div class="link-grid">
+    <a href="#kinder">🏆 Kinderwelt</a>
+    <a href="#buecherwelt">📚 Bücherwelt</a>
+    <a href="#rad">🍷 Glorias Genusswelt</a>
+    <a href="#wandern">🥾 Fidels Wanderwelt</a>
+  </div>
+</section>
+
+<section id="buecherwelt" class="card books-card">
+  <div class="kicker">📚 Bücherwelt der Wilden Wachauer Windis</div>
+  <h2>Die Bücher der Wilden Wachauer Windis</h2>
+  <p>Fidel, Gloria und Pia erleben Abenteuer in der Wachau – für Kinder, Familien, Wanderer, Radfahrer und alle Gäste, die eine Erinnerung mit nach Hause nehmen möchten.</p>
+
+  <div class="book-grid">
+    <article>
+      <h3>🐾 Fidel</h3>
+      <p>Der große Galgo führt durch Wege, Burgen und Wachauer Geschichten.</p>
+    </article>
+    <article>
+      <h3>🍷 Gloria</h3>
+      <p>Gloria liebt Genuss, Rastplätze, Spitz und die kleinen Geheimnisse der Wachau.</p>
+    </article>
+    <article>
+      <h3>🌿 Pia</h3>
+      <p>Pia entdeckt mit Kindern Quizfragen, Schatzsuchen und kleine Abenteuer.</p>
+    </article>
+  </div>
+
+  <div class="book-highlight">
+    <h3>🎁 Gäste-Tipp</h3>
+    <p>Die Windis-Bücher passen als Erinnerung an den Aufenthalt bei Zuhause am Bach – besonders für Familien und Wachau-Freunde.</p>
+  </div>
+
+  <div class="button-row">
+    <a class="btn-link" href="https://www.diewildenwachauerwindis.at/buecher-shop/die-wilden-wachauer-windis/" target="_blank" rel="noopener">📚 Zu den Windis-Büchern</a>
+    <a class="btn-link brown" href="#kinder">🏆 Zur Kinderwelt</a>
+  </div>
+</section>
+
+<section id="datenschutz" class="card legal-card">
+  <div class="kicker">ℹ Impressum & Datenschutz</div>
+  <h2>Informationen zur Gäste-App</h2>
+  <div class="info-grid">
+    <article><h3>Impressum</h3><p>Zuhause am Bach – Gästehaus Wachau, Aggsbach Markt 82, 3641 Aggsbach Markt. Tel. <a href="tel:+436646437526">0664 6437526</a>.</p></article>
+    <article><h3>Lokale Speicherung</h3><p>Die App speichert WLAN-Bestätigung, Windis-Stempel und Gästebuch-Einträge nur lokal im Browser des Geräts.</p></article>
+    <article><h3>Externe Dienste</h3><p>Wetterdaten kommen von Open-Meteo. Das Diagramm lädt Chart.js über jsDelivr CDN.</p></article>
+    <article><h3>Externe Links</h3><p>Booking.com, Google Maps/Suche, WhatsApp, SMS und Telefonlinks öffnen Dienste außerhalb dieser App.</p></article>
+  </div>
+  <p class="small">Diese statische Gäste-App verwendet keine Benutzerkonten und kein eigenes Tracking. Beim Öffnen externer Dienste gelten deren Datenschutzbestimmungen.</p>
+</section>
 </main>
-<nav class="nav"><button onclick="show('home')">🏡 Heute</button><button onclick="show('bookings')">🛏 Buchung</button><button onclick="show('extras')">🍺 Extras</button><button onclick="show('invoice')">💶 Rechnung</button></nav>
-<script>
-const rooms=["DZ Bachblick","Marillenzimmer","Weinbergzimmer","Donauzimmer"];
-const drinks=[["Cola",3.50],["Fanta",3.50],["Bier",4.00],["Radler",4.00],["Wein 1/8",3.80],["Mineral",2.80],["Kaffee",2.80],["Tee",2.50]];
-const foods=[["Frühstück",12.00],["Gulasch",12.00],["Schinkenplatte",11.00],["Gemischter Salat",7.50],["Grillteller klein",14.00],["Marillenkuchen",4.50]];
-let data=JSON.parse(localStorage.getItem("zabMobilePagesV2")||"null")||{guests:[{id:"G1",name:"Devich Armin",phone:"",email:"",notes:""},{id:"G2",name:"Paul Artner",phone:"",email:"",notes:""}],bookings:[],extras:{},activeBooking:null};
-function save(){localStorage.setItem("zabMobilePagesV2",JSON.stringify(data));renderAll()} function show(id){document.querySelectorAll("main>section").forEach(s=>s.classList.add("hidden"));document.getElementById(id).classList.remove("hidden");renderAll()}
-function makeId(p){return p+Date.now().toString(36)+Math.random().toString(36).slice(2,6)} function guestName(gid){return(data.guests.find(g=>g.id===gid)||{}).name||"Unbekannt"} function nights(a,d){if(!a||!d)return 0;return Math.max(0,Math.round((new Date(d)-new Date(a))/86400000))}
-function renderAll(){renderRoomSelects();renderGuests();renderBookings();renderActiveSelects();renderItems();renderInvoice();renderHome()} function renderRoomSelects(){let s=document.getElementById("bookingRoom");if(s)s.innerHTML=rooms.map(r=>`<option>${r}</option>`).join("")} function renderGuestSelect(){let s=document.getElementById("bookingGuest");s.innerHTML=data.guests.map(g=>`<option value="${g.id}">${g.name}</option>`).join("")}
-function newGuest(){guestFormTitle.textContent="Neuer Gast";guestId.value="";guestName.value="";guestPhone.value="";guestEmail.value="";guestNotes.value="";show("editGuest")} function editGuest(gid){let g=data.guests.find(x=>x.id===gid);if(!g)return;guestFormTitle.textContent="Gast bearbeiten";guestId.value=g.id;guestName.value=g.name;guestPhone.value=g.phone||"";guestEmail.value=g.email||"";guestNotes.value=g.notes||"";show("editGuest")}
-function saveGuest(){let gid=guestId.value||makeId("G");let g=data.guests.find(x=>x.id===gid);if(!g){g={id:gid};data.guests.push(g)}g.name=guestName.value.trim()||"Neuer Gast";g.phone=guestPhone.value.trim();g.email=guestEmail.value.trim();g.notes=guestNotes.value.trim();save();show("guests")} function newGuestFromBooking(){newGuest()}
-function renderGuests(){let q=(document.getElementById("guestSearch")?.value||"").toLowerCase();let list=document.getElementById("guestList");if(!list)return;let rows=data.guests.filter(g=>g.name.toLowerCase().includes(q)||(g.phone||"").includes(q));list.innerHTML=rows.map(g=>`<div class="row" onclick="editGuest('${g.id}')"><div><b>${g.name}</b><br><span class="small">${g.phone||"keine Telefonnummer"}</span></div><span class="pill">öffnen</span></div>`).join("")||"<div class='small'>Keine Gäste gefunden.</div>"}
-function newBooking(){renderGuestSelect();bookingFormTitle.textContent="Neue Buchung";bookingId.value="";bookingArrival.value=new Date().toISOString().slice(0,10);bookingDeparture.value=new Date(Date.now()+86400000).toISOString().slice(0,10);bookingPersons.value=2;bookingPrice.value=89;bookingBreakfast.value="kein";bookingRoom.value=rooms[0];show("editBooking")} function editBooking(bid){let b=data.bookings.find(x=>x.id===bid);if(!b)return;renderGuestSelect();bookingFormTitle.textContent="Buchung bearbeiten";bookingId.value=b.id;bookingGuest.value=b.guestId;bookingRoom.value=b.room;bookingArrival.value=b.arrival;bookingDeparture.value=b.departure;bookingPersons.value=b.persons;bookingPrice.value=b.price;bookingBreakfast.value=b.breakfast||"kein";show("editBooking")}
-function overlap(a1,d1,a2,d2){return a1<d2&&a2<d1} function saveBooking(){let bid=bookingId.value||makeId("B");let room=bookingRoom.value,a=bookingArrival.value,d=bookingDeparture.value;let conflict=data.bookings.find(b=>b.id!==bid&&b.room===room&&overlap(a,d,b.arrival,b.departure));if(conflict){alert("Doppelbelegung: "+room+" ist bereits von "+guestName(conflict.guestId)+" belegt.");return}let b=data.bookings.find(x=>x.id===bid);if(!b){b={id:bid};data.bookings.push(b)}b.guestId=bookingGuest.value;b.room=room;b.arrival=a;b.departure=d;b.persons=Number(bookingPersons.value||1);b.price=Number(bookingPrice.value||0);b.breakfast=bookingBreakfast.value;data.activeBooking=bid;save();show("bookings")}
-function deleteBooking(){let bid=bookingId.value;if(!bid)return show("bookings");if(confirm("Buchung wirklich löschen?")){data.bookings=data.bookings.filter(b=>b.id!==bid);delete data.extras[bid];if(data.activeBooking===bid)data.activeBooking=null;save();show("bookings")}}
-function renderBookings(){let list=document.getElementById("bookingList");if(!list)return;let sorted=[...data.bookings].sort((a,b)=>a.arrival.localeCompare(b.arrival));list.innerHTML=sorted.map(b=>`<div class="row" onclick="editBooking('${b.id}')"><div><b>${guestName(b.guestId)}</b><br><span class="room">${b.room}</span> · ${b.arrival} bis ${b.departure} · ${b.persons} Pers. · ${b.breakfast}</div><span class="pill">${nights(b.arrival,b.departure)} Nä.</span></div>`).join("")||"<div class='small'>Noch keine Buchungen.</div>"}
-function renderActiveSelects(){let opts=data.bookings.map(b=>`<option value="${b.id}">${b.room} – ${guestName(b.guestId)} (${b.arrival})</option>`).join("");["activeBooking","invoiceBooking"].forEach(id=>{let s=document.getElementById(id);if(!s)return;s.innerHTML=opts||"<option>Keine Buchung</option>";if(data.activeBooking)s.value=data.activeBooking})} function setActiveBooking(bid){data.activeBooking=bid;save()}
-function renderItems(){let db=document.getElementById("drinkButtons"),fb=document.getElementById("foodButtons");if(db)db.innerHTML=drinks.map(x=>`<button class="btn itembtn blue" onclick="addExtra('${x[0]}',${x[1]})">➕ ${x[0]}<br>${x[1].toFixed(2)} €</button>`).join("");if(fb)fb.innerHTML=foods.map(x=>`<button class="btn itembtn gold" onclick="addExtra('${x[0]}',${x[1]})">➕ ${x[0]}<br>${x[1].toFixed(2)} €</button>`).join("")}
-function addExtra(text,price){let bid=data.activeBooking||data.bookings[0]?.id;if(!bid){alert("Bitte zuerst eine Buchung anlegen/auswählen.");return}data.activeBooking=bid;data.extras[bid]=data.extras[bid]||[];data.extras[bid].push({id:makeId("E"),text,price:Number(price),qty:1,ts:new Date().toISOString()});save();alert(text+" zur Rechnung hinzugefügt.")}
-function addCustom(){let t=customText.value.trim(),p=Number(customPrice.value||0);if(!t||!p){alert("Bitte Text und Betrag eingeben.");return}addExtra(t,p);customText.value="";customPrice.value=""} function clearExtras(){let bid=data.activeBooking;if(!bid)return;if(confirm("Extras dieser Buchung löschen?")){data.extras[bid]=[];save()}}
-function renderInvoice(){let box=document.getElementById("invoiceDetails");if(!box)return;let bid=data.activeBooking||data.bookings[0]?.id;data.activeBooking=bid;let b=data.bookings.find(x=>x.id===bid);if(!b){box.innerHTML="<p>Keine Buchung ausgewählt.</p>";return}let ex=data.extras[bid]||[];let roomTotal=nights(b.arrival,b.departure)*Number(b.price||0);let extraTotal=ex.reduce((s,e)=>s+e.price*e.qty,0);box.innerHTML=`<h2>${guestName(b.guestId)}</h2><p><b>${b.room}</b><br>${b.arrival} bis ${b.departure}</p><div class="row"><div>Zimmer</div><b>${roomTotal.toFixed(2)} €</b></div>${ex.map(e=>`<div class="row"><div>${e.qty}× ${e.text}</div><b>${(e.qty*e.price).toFixed(2)} €</b></div>`).join("")}<div class="row"><div class="total">Gesamt</div><div class="total">${(roomTotal+extraTotal).toFixed(2)} €</div></div>`}
-function invoiceText(){let bid=data.activeBooking||data.bookings[0]?.id;let b=data.bookings.find(x=>x.id===bid);if(!b)return"";let ex=data.extras[bid]||[];let roomTotal=nights(b.arrival,b.departure)*Number(b.price||0);let lines=[`Rechnung ${guestName(b.guestId)}`,`${b.room}: ${b.arrival} bis ${b.departure}`,`Zimmer: ${roomTotal.toFixed(2)} €`];ex.forEach(e=>lines.push(`${e.qty}x ${e.text}: ${(e.qty*e.price).toFixed(2)} €`));lines.push(`Gesamt: ${(roomTotal+ex.reduce((s,e)=>s+e.price*e.qty,0)).toFixed(2)} €`);return lines.join("\n")} function copyInvoice(){navigator.clipboard.writeText(invoiceText());alert("Rechnungstext kopiert.")} function exportJson(){let blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});let a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="zab_mobile_export.json";a.click()}
-function renderHome(){let today=new Date().toISOString().slice(0,10);let todayBookings=data.bookings.filter(b=>b.arrival<=today&&b.departure>=today);let tl=document.getElementById("todayList");if(tl)tl.innerHTML=todayBookings.map(b=>`<div class="row"><div><b>${guestName(b.guestId)}</b><br><span class="room">${b.room}</span> · ${b.breakfast}</div><span class="pill">${b.persons} Pers.</span></div>`).join("")||"<div class='small'>Heute keine aktive Buchung.</div>";let rs=document.getElementById("roomStatus");if(rs)rs.innerHTML=rooms.map(r=>{let b=todayBookings.find(x=>x.room===r);return`<div class="row"><div class="room">${r}</div><span class="pill ${b?'blue':'ok'}">${b?guestName(b.guestId):'frei'}</span></div>`}).join("")}
-if("serviceWorker"in navigator){navigator.serviceWorker.register("./sw.js").catch(()=>{})} window.addEventListener("beforeinstallprompt",e=>{window.deferredPrompt=e;document.getElementById("installHint").textContent="Chrome: App kann installiert werden. Menü ⋮ öffnen oder Installieren-Hinweis verwenden."});renderAll();
-</script>
+
+
+<footer class="footer">
+  <div><strong>© 2026 Zuhause am Bach – Gästehaus Wachau</strong></div>
+  <div>Die Wilden Wachauer Windis © J.F.X. Prem</div>
+  <div>Aggsbach Markt 82 · 3641 Aggsbach Markt · Tel. <a href="tel:+436646437526">0664 6437526</a></div>
+  <div class="footer-links">
+    <a href="#hausinfo">Hausinfo</a>
+    <a href="#notfall">Notfall</a>
+    <a href="#service">Kontakt & Service</a>
+    <a href="#direktbuchung">Direkt buchen</a>
+    <a href="#challenge">Windis-Stempel</a>
+    <a href="#gaestebuch">Gästebuch</a>
+    <a href="#datenschutz">Impressum & Datenschutz</a>
+    <a href="https://www.diewildenwachauerwindis.at" target="_blank" rel="noopener">Windis-Webseite</a>
+  </div>
+</footer>
+
+
+<script src="app.js?v=49"></script>
 </body>
 </html>
