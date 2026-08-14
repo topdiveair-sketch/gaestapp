@@ -6,7 +6,8 @@
 <meta name="theme-color" content="#2f5d50">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
-<title>Zuhause am Bach Mobile</title>
+<meta name="description" content="Übernachten, wo Geschichten entstehen: Zuhause am Bach in der Wachau – das Zuhause der Wilden Wachauer Windis. Persönlich wohnen, die Wachau entdecken und direkt anfragen.">
+<title>Zuhause am Bach – Zuhause der Wilden Wachauer Windis</title>
 <style>
 :root{--bg:#f6f2ea;--card:#fffaf1;--ink:#1f2b25;--green:#2f5d50;--gold:#d89b34;--red:#b64735;--blue:#456c93;--line:#e3d8c5;--shadow:0 8px 24px rgba(0,0,0,.12)}
 *{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
@@ -20,9 +21,32 @@ h1{font-size:24px;margin:0 0 6px;font-weight:900}.small{font-size:13px;opacity:.
 input,select,textarea{width:100%;font-size:18px;padding:14px;border-radius:14px;border:1px solid var(--line);background:white;margin:6px 0 10px}
 label{font-weight:900;font-size:14px;color:#66736b}.hidden{display:none}.nav{position:fixed;bottom:0;left:0;right:0;background:white;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);z-index:20}
 .nav button{border:0;background:white;padding:10px 4px;font-size:13px;font-weight:900;color:var(--ink)}.total{font-size:30px;font-weight:900;color:var(--green)}.itembtn{font-size:18px;min-height:68px;padding:12px}.danger{background:#ffe1db;color:#8a2416}.ok{background:#dff1e9;color:#174737}.notice{font-size:14px;background:#eef6f2;border:1px solid #cfe2da;border-radius:14px;padding:10px;margin-top:10px}@media (min-width:700px){.grid{grid-template-columns:repeat(4,1fr)}}
+.brand-hero{position:relative;isolation:isolate;min-height:560px;display:grid;align-items:end;background:#173d34;color:#fff;overflow:hidden}.brand-hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}.brand-hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,35,29,.18),rgba(12,35,29,.92));z-index:-1}.hero-copy{width:min(920px,100%);margin:auto;padding:72px 20px 42px}.eyebrow{font-size:14px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#ffe5a8}.brand-hero h1{font-size:clamp(38px,7vw,72px);line-height:.98;max-width:780px;margin:12px 0 18px}.brand-hero p{font-size:clamp(18px,2.5vw,25px);max-width:720px;line-height:1.45}.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin:24px 0}.cta{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:14px 20px;border-radius:999px;background:#f4b84a;color:#1f2b25;text-decoration:none;font-weight:900}.cta.secondary{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.7);color:#fff}.trust{display:flex;flex-wrap:wrap;gap:10px;font-weight:800}.trust span{padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.12)}.brand-story{max-width:760px;margin:18px auto;padding:0 14px}.brand-story .card{padding:24px}.brand-story p{font-size:17px;line-height:1.6}.brand-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.admin-label{max-width:760px;margin:22px auto 0;padding:0 14px;color:var(--muted);font-size:13px;font-weight:900;text-transform:uppercase;letter-spacing:.08em}@media(max-width:520px){.brand-hero{min-height:620px}.hero-copy{padding:52px 18px 34px}.hero-actions{display:grid}.cta{width:100%}.trust{display:grid}.brand-story .card{padding:18px}}
 </style>
 </head>
 <body>
+<section class="brand-hero" aria-labelledby="brand-title">
+<img src="https://raw.githubusercontent.com/topdiveair-sketch/gaestapp/feature/weather-dashboard/hero-windis.png" alt="Die Wilden Wachauer Windis bei Zuhause am Bach in der Wachau">
+<div class="hero-copy">
+<div class="eyebrow">Zuhause der Wilden Wachauer Windis</div>
+<h1 id="brand-title">Übernachten, wo Geschichten entstehen</h1>
+<p>Bei <strong>Zuhause am Bach</strong> wird die Wachau zum Erlebnis: ein persönlicher Rückzugsort für Familien, Wanderer und Radfahrer – und das echte Zuhause von Fidel, Gloria und Pia.</p>
+<div class="hero-actions">
+<a class="cta" href="https://wa.me/436646437526?text=Hallo%2C%20ich%20m%C3%B6chte%20gerne%20direkt%20bei%20Zuhause%20am%20Bach%20buchen." target="_blank" rel="noopener">Aufenthalt direkt anfragen</a>
+<a class="cta secondary" href="https://www.diewildenwachauerwindis.at/buecher-shop/die-wilden-wachauer-windis/" target="_blank" rel="noopener">Die Windis-Bücher entdecken</a>
+</div>
+<div class="trust" aria-label="Ihre Vorteile"><span>Wenige Gäste</span><span>Persönliche Gastgeber</span><span>Besonderer Ort</span></div>
+</div>
+</section>
+<section class="brand-story">
+<article class="card">
+<h2>Die Wachau erleben – mit den Windis</h2>
+<p>Die Figuren aus den Kinderbüchern sind hier nicht nur eine Geschichte. Fidel führt gedanklich zu Wanderwegen, Gloria zu den genussvollen Seiten der Wachau und Pia macht den Aufenthalt für Kinder zum Abenteuer. So verbindet sich das Buch mit einem echten Ort, den Familien gemeinsam entdecken können.</p>
+<p><strong>Exklusiv für Hausgäste:</strong> Die Windi-Chronik begleitet den Aufenthalt als persönliche Erinnerung an die Wachau – vom ersten Abenteuer bis zur Heimreise.</p>
+<div class="brand-links"><a class="cta" href="https://www.diewildenwachauerwindis.at/zuhause-am-bach-privatzimmer/" target="_blank" rel="noopener">Zimmer &amp; Aufenthalt ansehen</a></div>
+</article>
+</section>
+<div class="admin-label">Gastgeber-Bereich</div>
 <header><h1>🏡 Zuhause am Bach Mobile</h1><div class="small">4 Zimmer • Gäste speichern • Extras zur Rechnung buchen</div></header>
 <main>
 <section id="home"><div class="grid"><button class="btn green" onclick="show('bookings')">🛏 Buchungen</button><button class="btn blue" onclick="show('guests')">👥 Gäste</button><button class="btn gold" onclick="show('extras')">🍺 Extras</button><button class="btn green" onclick="show('invoice')">💶 Rechnung</button></div><div class="notice" id="installHint">Online öffnen. In Chrome erscheint nach kurzer Zeit „App installieren“ oder „Zum Startbildschirm hinzufügen“.</div><div class="card"><h2>Heute / Schnellzugriff</h2><div id="todayList"></div></div><div class="card"><h2>Zimmer</h2><div id="roomStatus"></div></div></section>

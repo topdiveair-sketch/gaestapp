@@ -326,6 +326,18 @@ footer{text-align:center;padding:30px;color:var(--muted)}
 }
 .chronicle-nav{display:flex;justify-content:center;background:#f4ead8;padding:10px 18px 2px}.chronicle-nav button{max-width:420px;background:#6b3f21}
 .chronicle-card{border:2px solid #8cae65;background:linear-gradient(160deg,#fffdf8,#f5eddd)}
+
+/* Markenpositionierung: Zuhause der Wilden Wachauer Windis */
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(24,15,9,.08) 25%,rgba(24,15,9,.88) 100%);pointer-events:none}
+.brand-hero-copy{position:absolute;z-index:4;left:50%;bottom:7%;transform:translateX(-50%);width:min(1040px,92%);color:#fff;text-shadow:0 3px 16px rgba(0,0,0,.55)}
+.brand-kicker{font-size:.9rem;font-weight:950;letter-spacing:.12em;text-transform:uppercase;color:#ffd98a}
+.brand-hero-copy h1{font-size:clamp(2.2rem,6vw,4.8rem);line-height:.98;max-width:850px;margin:.5rem 0 1rem;letter-spacing:-.035em}
+.brand-hero-copy p{font-size:clamp(1.05rem,2.2vw,1.45rem);line-height:1.45;max-width:760px;margin:0}
+.brand-actions{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0 14px;text-shadow:none}
+.brand-cta{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:13px 19px;border-radius:999px;background:#f2b84b;color:#24170e;text-decoration:none;font-weight:950;box-shadow:0 8px 22px rgba(0,0,0,.24)}
+.brand-cta-secondary{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.75);color:#fff;backdrop-filter:blur(5px)}
+.brand-trust{display:flex;flex-wrap:wrap;gap:8px;text-shadow:none}.brand-trust span{padding:7px 11px;border-radius:999px;background:rgba(255,255,255,.15);font-size:.9rem;font-weight:850;backdrop-filter:blur(4px)}
+@media(max-width:760px){.hero{min-height:660px}.hero-img{position:absolute;inset:0;height:100%;object-fit:cover}.brand-hero-copy{bottom:28px}.brand-actions{display:grid}.brand-cta{width:100%}.brand-trust{display:grid;grid-template-columns:1fr}.brand-trust span{text-align:center}.badge{max-width:165px;font-size:.76rem;padding:8px 10px}.language-bar{max-width:190px}}
 .chronicle-status{padding:10px 14px;margin:14px 0;border-radius:10px;background:#e8f2df}.chronicle-status.demo{background:#fff1c9;color:#633e16}
 .chronicle-actions{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}.chronicle-primary{background:#2d6a27!important}.chronicle-secondary{background:#72543b!important}
 .chronicle-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:20px}.chronicle-entry{background:white;border:1px solid #c9d9b8;border-radius:16px;padding:18px;box-shadow:0 8px 22px #4c5f3420}.chronicle-meta,.chronicle-author{color:#6c4b34;font-size:.92rem}.chronicle-entry h3{margin:.5rem 0}.chronicle-photos{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}.chronicle-photos img{width:100%;height:150px;object-fit:cover;border-radius:8px}.entry-footer{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-top:14px}.entry-footer details{text-align:right;max-width:180px}.entry-footer details a{display:block;overflow-wrap:anywhere;font-size:.75rem}.entry-qr{display:block;width:130px;height:130px;margin:8px 0 8px auto}
