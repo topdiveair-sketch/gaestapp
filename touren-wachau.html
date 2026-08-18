@@ -11,7 +11,40 @@
 <style>
 :root{--green:#315b2b;--brown:#5a3824;--cream:#fff8ec;--ink:#2c251f;--muted:#6b625a;--line:#e5d7c4}*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);background:#f6f2ea;line-height:1.6}a{color:inherit}.hero{padding:72px 20px;background:linear-gradient(135deg,#263c24,#6b472d);color:#fff}.wrap{max-width:1050px;margin:auto}.eyebrow{font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#f5dcae}.hero h1{font-size:clamp(38px,7vw,70px);line-height:1.02;margin:.2em 0}.hero p{font-size:clamp(18px,2.4vw,25px);max-width:780px}.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:25px}.btn{display:inline-block;padding:14px 20px;border-radius:999px;background:#fff0c7;color:#3d281a;text-decoration:none;font-weight:900}.btn.alt{background:transparent;color:#fff;border:1px solid #fff}.card{max-width:1050px;margin:22px auto;background:#fff;padding:28px;border-radius:22px;border:1px solid var(--line)}h2{color:var(--brown);font-size:clamp(27px,4vw,40px);margin-top:0}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.grid article{padding:20px;border-radius:18px;background:var(--cream);border:1px solid var(--line)}.route{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.route article{padding:18px;border-left:5px solid var(--green);background:#f7faf3;border-radius:12px}.note{padding:18px;border-radius:14px;background:#fff6df;border:1px solid #ead39b}.cta{background:var(--green);color:#fff}.cta h2{color:#fff}.small{font-size:14px;color:var(--muted)}@media(max-width:760px){.grid,.route{grid-template-columns:1fr}.hero{padding-top:48px}.card{margin:12px;border-radius:16px}}
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"LodgingBusiness","name":"Zuhause am Bach – Wachau","description":"Persönliche Unterkunft und Tourenbasis in Aggsbach Markt für Wanderer am Welterbesteig Wachau und Radfahrer am Donauradweg; Zuhause der Wilden Wachauer Windis.","address":{"@type":"PostalAddress","streetAddress":"Aggsbach Markt 82","postalCode":"3641","addressLocality":"Aggsbach Markt","addressCountry":"AT"},"url":"https://topdiveair-sketch.github.io/gaestapp/","sameAs":["https://www.diewildenwachauerwindis.at/"]}</script>
+<script type="application/ld+json">{
+  "@context":"https://schema.org",
+  "@graph":[
+    {
+      "@type":"LodgingBusiness",
+      "@id":"https://topdiveair-sketch.github.io/gaestapp/#lodging",
+      "name":"Zuhause am Bach – Wachau",
+      "description":"Persönliche Unterkunft und Tourenbasis in Aggsbach Markt für Wanderer am Welterbesteig Wachau und Radfahrer am Donauradweg; Zuhause der Wilden Wachauer Windis.",
+      "address":{"@type":"PostalAddress","streetAddress":"Aggsbach Markt 82","postalCode":"3641","addressLocality":"Aggsbach Markt","addressCountry":"AT"},
+      "url":"https://topdiveair-sketch.github.io/gaestapp/",
+      "sameAs":["https://www.diewildenwachauerwindis.at/"],
+      "knowsAbout":["Welterbesteig Wachau","Donauradweg","Aggsbach Markt","Wachau","Die Wilden Wachauer Windis"]
+    },
+    {
+      "@type":"WebPage",
+      "@id":"https://topdiveair-sketch.github.io/gaestapp/touren-wachau.html#webpage",
+      "url":"https://topdiveair-sketch.github.io/gaestapp/touren-wachau.html",
+      "name":"Welterbesteig & Donauradweg Aggsbach – Tourenbasis Zuhause am Bach",
+      "about":[{"@id":"https://topdiveair-sketch.github.io/gaestapp/#lodging"},{"@type":"Thing","name":"Welterbesteig Wachau"},{"@type":"Thing","name":"Donauradweg"},{"@type":"Place","name":"Aggsbach Markt"}],
+      "mainEntity":{"@id":"https://topdiveair-sketch.github.io/gaestapp/#lodging"}
+    },
+    {
+      "@type":"ItemList",
+      "name":"Windis-Schauplätze und Tourenbezug",
+      "itemListElement":[
+        {"@type":"ListItem","position":1,"item":{"@type":"Place","name":"Aggstein"}},
+        {"@type":"ListItem","position":2,"item":{"@type":"Place","name":"Melk"}},
+        {"@type":"ListItem","position":3,"item":{"@type":"Place","name":"Krems"}},
+        {"@type":"ListItem","position":4,"item":{"@type":"Place","name":"Dürnstein"}},
+        {"@type":"ListItem","position":5,"item":{"@type":"Thing","name":"Welterbesteig Wachau"}}
+      ]
+    }
+  ]
+}</script>
 </head>
 <body>
 <header class="hero"><div class="wrap"><div class="eyebrow">Aggsbach Markt · Wachau</div><h1>Tourenbasis am Welterbesteig & Donauradweg</h1><p>Planst du deine Wachau-Tour mit Komoot, Outdooractive oder einem offiziellen Tourenportal? Zuhause am Bach ist dein persönlicher Übernachtungsstopp in Aggsbach Markt – für Wanderer, Radfahrer und Entdecker.</p><div class="actions"><a class="btn" href="https://topdiveair-sketch.github.io/Direcktbuchungen/index">Verfügbarkeit prüfen & direkt buchen</a><a class="btn alt" href="https://www.diewildenwachauerwindis.at/buecher-shop/die-wilden-wachauer-windis/">Windis-Bücher entdecken</a></div></div></header>

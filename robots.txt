@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://topdiveair-sketch.github.io/gaestapp/sitemap.xml
