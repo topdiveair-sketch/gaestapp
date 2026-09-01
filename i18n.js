@@ -43,7 +43,6 @@ Object.assign(LANGS.cz,{
 "Die Windis-Bücher passen als Erinnerung an den Aufenthalt bei Zuhause am Bach – besonders für Familien und Wachau-Freunde.":"Knihy Windis jsou krásnou vzpomínkou na pobyt v Zuhause am Bach – zejména pro rodiny a přátele Wachau.",
 "Ein echter Wachau-Moment mit Wein oder Traubensaft.":"Pravý okamžik ve Wachau s vínem nebo hroznovou šťávou.",
 "Fahrradgarage und E-Bike-Laden":"Úschovna kol a nabíjení elektrokol",
-"Fidels Empfehlung: schöne Nordufer-Tour Richtung Spitz mit Einkehrmöglichkeit. Mit Hund: Wasser mitnehmen und Hitze beachten.":"Fidel doporučuje krásnou trasu po severním břehu směrem na Spitz s možností občerstvení. Se psem si vezměte vodu a dávejte pozor na horko.",
 "Fidels Nordufer-Tipps für den Welterbesteig.":"Fidelovy tipy pro trasu Welterbesteig na severním břehu.",
 "Freunde empfehlen Zuhause am Bach":"Doporučte Zuhause am Bach přátelům",
 "für 0 gesammelte Wachau-Punkte bei Zuhause am Bach.":"za 0 bodů Wachau nasbíraných během pobytu v Zuhause am Bach.",
