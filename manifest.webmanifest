@@ -1,7 +1,7 @@
 {
-  "name": "Zuhause am Bach Mobile",
+  "name": "Zuhause am Bach-Wachau Gäste-App",
   "short_name": "ZAB Mobile",
-  "description": "Mobile Arbeits-App für Zuhause am Bach.",
+  "description": "Gäste-App von Zuhause am Bach-Wachau für Aufenthalt, Routen und Service.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
